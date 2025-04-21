@@ -71,7 +71,7 @@ const SplashScreen = () => {
 
         <Button
           mode="contained"
-          onPress={() => navigation.navigate("Root")}
+          onPress={() => navigation.navigate("Login")}
           buttonColor="#567DF4"
           style={{ borderRadius: 9, marginHorizontal: 20, marginTop: 50 }}
         >

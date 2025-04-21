@@ -9,7 +9,9 @@ const HomeScreen = ({ navigation }) => (
       <LocationHeader />
       <SearchBar />
       <View>
-        <Text style={{ fontSize: 18, marginHorizontal: 10 }}>
+        <Text
+          style={{ fontSize: 22, marginHorizontal: 10, fontWeight: "bold" }}
+        >
           Welcome to Rentaxo
         </Text>
       </View>
