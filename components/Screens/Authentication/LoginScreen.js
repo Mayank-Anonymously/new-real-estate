@@ -9,15 +9,21 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // You can use this with Expo
 import { useNavigation } from "@react-navigation/native";
-
+import user from "../../../utils/user.json";
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
+
+  const handleLogin = () => {
+    if (user.email === email && user.password === password) {
+      navigation.navigate("Root");
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titleBrand}>Rentaxo</Text>
+      <Text style={styles.titleBrand}>Nj Housing</Text>
       <Text style={styles.title}>Sign in</Text>
 
       <Text style={styles.label}>YOUR EMAIL</Text>
@@ -50,10 +56,7 @@ export default function LoginScreen() {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => navigation.navigate("Root")}
-      >
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 

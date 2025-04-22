@@ -11,7 +11,6 @@ import React, { useEffect } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-
 const SplashScreen = () => {
   const navigation = useNavigation();
 
@@ -35,11 +34,12 @@ const SplashScreen = () => {
           source={require("../../assets/images/showcase_images/splash.png")}
           style={{ resizeMode: "contain", width: 400, height: 200 }}
         />
+
         <View style={{ marginLeft: 20 }}>
           <Text style={[styles.text, { fontSize: 27, fontStyle: "italic" }]}>
             Welcome to{" "}
           </Text>
-          <Text style={[styles.text, { fontSize: 46 }]}>Rentaxo</Text>
+          <Text style={[styles.text, { fontSize: 46 }]}>NJ housing</Text>
           <Text
             style={[
               styles.text,

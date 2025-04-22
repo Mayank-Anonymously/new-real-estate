@@ -27,7 +27,7 @@ const LocationHeader = () => {
               style={{ marginLeft: 10 }}
             />
             <Text style={{ fontSize: 20, marginLeft: 8, fontWeight: "bold" }}>
-              Noida, Uttar Pradesh
+              New Jersey, USA
             </Text>
             <Entypo
               name="chevron-down"
