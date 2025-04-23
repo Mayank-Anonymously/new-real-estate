@@ -153,7 +153,7 @@ export default function PropertyDetailScreen() {
                       <EvilIcons name="location" size={20} color="#7D7F88" />
                       {/* <Text numberOfLines={2}>{item.property.address}</Text> */}
                       <Text numberOfLines={2} style={{ color: "#7D7F88" }}>
-                        "dfsf"
+                        {/* "dfsf" */}
                       </Text>
                     </View>
                     <View style={{ flexDirection: "row", margin: 10 }}>
