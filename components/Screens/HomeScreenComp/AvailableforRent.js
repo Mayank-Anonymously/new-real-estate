@@ -12,7 +12,7 @@ const AvailableforRent = () => {
   return (
     <ScrollView>
       <View style={{ backgroundColor: "white" }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 40 }}>
           Near your location
         </Text>
 
@@ -28,6 +28,7 @@ const AvailableforRent = () => {
             style={{ width: 50, height: 40 }}
             labelStyle={{ fontSize: 12 }}
             mode="text"
+            onPress={() => navigation.navigate("Explore")}
           >
             See all
           </Button>
@@ -43,6 +44,7 @@ const AvailableforRent = () => {
                       navigation.navigate("PropertyDetail", {
                         title: item.title,
                         image: item.image,
+                        rent: item.price,
                       })
                     }
                     title={item.title}
@@ -81,6 +83,8 @@ const AvailableforRent = () => {
                     onPress={() =>
                       navigation.navigate("PropertyDetail", {
                         title: item.title,
+                        rent: item.price,
+                        image: item.image,
                       })
                     }
                     title={item.title}

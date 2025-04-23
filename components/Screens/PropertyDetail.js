@@ -8,8 +8,15 @@ import {
   TouchableOpacity,
   Linking,
   FlatList,
+  Platform,
 } from "react-native";
-import { Ionicons, MaterialIcons, Feather } from "@expo/vector-icons";
+import {
+  Ionicons,
+  EvilIcons,
+  Feather,
+  MaterialIcons,
+  FontAwesome6,
+} from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
 import property_details from "../../utils/properties_detail.json";
 import { Avatar } from "react-native-paper";
@@ -21,6 +28,18 @@ export default function PropertyDetailScreen() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    async function loadFonts() {
+      await Font.loadAsync({
+        "Hind-Jalandhar": require("../../assets/fonts/Hind/Hind-Regular.ttf"),
+        "Hind-Jalandhar-Bold": require("../../assets/fonts/Hind/Hind-Bold.ttf"),
+
+        "Hind-Jalandhar": require("../../assets/fonts/Hind/Hind-Light.ttf"),
+
+        "Hind-Jalandhar": require("../../assets/fonts/Hind/Hind-Medium.ttf"),
+      });
+      setFontsLoaded(true);
+    }
+    loadFonts();
     setData(property_details);
   }, []);
 
@@ -30,6 +49,43 @@ export default function PropertyDetailScreen() {
   return (
     <>
       <ScrollView style={styles.container}>
+        <View
+          style={{
+            position: "absolute",
+            zIndex: 9999,
+            top: 30,
+            marginHorizontal: 20,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "90%",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              borderRadius: 100,
+              alignItems: "center",
+              justifyContent: "center",
+              width: 50,
+              height: 50,
+            }}
+          >
+            <EvilIcons name="arrow-left" size={33} />
+          </View>
+          <View
+            style={{
+              backgroundColor: "white",
+              borderRadius: 100,
+              alignItems: "center",
+              justifyContent: "center",
+              width: 50,
+              height: 50,
+            }}
+          >
+            <EvilIcons name="arrow-left" size={33} />
+          </View>
+        </View>
         <Image
           source={{
             uri: Image.resolveAssetSource(
@@ -51,38 +107,65 @@ export default function PropertyDetailScreen() {
             var utilities = item.property.utilities;
             var parking = item.property.parkingAndEntry;
             var nearbyServices = item.property.nearbyServices;
+            var accessibility = item.property.accessibility;
 
             return (
               <View style={styles.content}>
-                <Text style={styles.title}>{item.property.name} </Text>
-                <Text style={styles.subtitle}>
-                  ⭐ 4.1 (66 reviews) · 🛏 {unit.bedrooms} room · 📐{" "}
-                  {unit.sizeSqFt} sqft
-                </Text>
-                <Text style={styles.location}>📍{item.property.address}</Text>
-
-                <View style={styles.ownerInfo}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Image
-                      source={require("../../assets/avatars/female.png")}
-                      style={styles.ownerAvatar}
-                    />
-                    <View>
-                      <Text style={styles.ownerName}>Bhuwan K.C</Text>
-                      <Text style={styles.ownerRole}>Property owner</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <View>
+                    <Text style={styles.title}>{item.property.name} </Text>
+                  </View>
+                  <View>
+                    <EvilIcons name="heart" size={24} />
+                  </View>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flex: 1,
+                    marginHorizontal: 20,
+                  }}
+                >
+                  <View>
+                    <View style={{ flexDirection: "row", margin: 10 }}>
+                      <Text style={{ color: "#7D7F88" }}>
+                        {" "}
+                        ⭐ 4.1 (66 reviews)
+                      </Text>
+                    </View>
+                    <View style={{ flexDirection: "row", margin: 10 }}>
+                      <Ionicons name="bed-outline" size={20} color="#7D7F88" />
+                      <Text style={{ color: "#7D7F88" }}>
+                        {unit.bedrooms} room{" "}
+                      </Text>
                     </View>
                   </View>
-                  <View
-                    style={{
-                      alignItems: "center",
-                      shadowColor: "red",
-                      shadowRadius: 4,
-                      elevation: 10,
-                      padding: 10,
-                      shadowOpacity: 5,
-                    }}
-                  >
-                    <Feather name="phone-call" size={20} />
+                  <View>
+                    <View style={{ flexDirection: "row", margin: 10 }}>
+                      <EvilIcons name="location" size={20} color="#7D7F88" />
+                      {/* <Text numberOfLines={2}>{item.property.address}</Text> */}
+                      <Text numberOfLines={2} style={{ color: "#7D7F88" }}>
+                        "dfsf"
+                      </Text>
+                    </View>
+                    <View style={{ flexDirection: "row", margin: 10 }}>
+                      <MaterialIcons
+                        name="house-siding"
+                        size={20}
+                        color="#7D7F88"
+                      />
+                      <Text style={{ color: "#7D7F88" }}>
+                        {unit.sizeSqFt} sqft
+                      </Text>
+                    </View>
                   </View>
                 </View>
 
@@ -91,13 +174,127 @@ export default function PropertyDetailScreen() {
                     backgroundColor: "#D6D6D6",
                     width: "100%",
                     height: 1,
-                    marginBottom: 50,
+                    marginBottom: 20,
+                    marginTop: 20,
                   }}
                 />
 
+                <View style={styles.ownerInfo}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Image
+                      source={require("../../assets/avatars/female.png")}
+                      style={styles.ownerAvatar}
+                    />
+                    <View>
+                      <Text style={styles.ownerName}>
+                        {item.property.contact.name}
+                      </Text>
+                      <Text style={styles.ownerRole}>
+                        {item.property.contact.role}
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      alignItems: "center",
+                      shadowColor: "#eeeff0",
+                      shadowRadius: 5,
+                      elevation: 10,
+                      padding: 10,
+                      shadowOpacity: 1,
+                      backgroundColor: "white",
+                      borderRadius: 10,
+                      shadowOffset: {
+                        x: 10,
+                        y: 5,
+                      },
+                    }}
+                  >
+                    <Feather name="phone-call" size={20} color="#7D7F88" />
+                  </View>
+                </View>
+
                 <View style={styles.section}>
                   <Text style={styles.sectionTitle}>Home facilities</Text>
-                  <Text style={styles.facility}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      margin: 10,
+                    }}
+                  >
+                    <MaterialIcons
+                      name="severe-cold"
+                      size={25}
+                      color="#7D7F88"
+                      style={{ marginRight: 10 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        color: "#7D7F88",
+                      }}
+                    >
+                      {" "}
+                      Air conditioner - {utilities?.airConditioner}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      margin: 10,
+                    }}
+                  >
+                    <FontAwesome6
+                      name="kitchen-set"
+                      size={21}
+                      color="#7D7F88"
+                      style={{ marginRight: 10 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        color: "#7D7F88",
+                      }}
+                    >
+                      {" "}
+                      Kicthen -{" "}
+                      {accessibility?.kitchen.type
+                        ? accessibility.kitchen.type
+                        : accessibility.kitchen}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      margin: 10,
+                    }}
+                  >
+                    <FontAwesome6
+                      name="car"
+                      size={20}
+                      style={{ marginRight: 10 }}
+                      color="#7D7F88"
+                    />
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        color: "#7D7F88",
+                      }}
+                    >
+                      {" "}
+                      Parking -{" "}
+                      {parking?.allottedParkingSpaces
+                        ? parking?.allottedParkingSpaces
+                        : "No Parking Space"}
+                    </Text>
+                  </View>
+                  {/* <Text style={styles.facility}>
                     🌬 Air conditioner {utilities?.airConditioner}
                   </Text>
                   <Text style={styles.facility}>
@@ -105,7 +302,7 @@ export default function PropertyDetailScreen() {
                   </Text>
                   <Text style={styles.facility}>
                     🚗 Free parking {parking?.allottedParkingSpaces}
-                  </Text>
+                  </Text> */}
                 </View>
 
                 <View style={styles.section}>
@@ -122,36 +319,57 @@ export default function PropertyDetailScreen() {
                     <View>
                       <View
                         style={{
-                          padding: 20,
                           backgroundColor: "white",
-                          elevation: 2,
-                          shadowColor: "grey",
-                          shadowRadius: 10,
                           margin: 10,
                           borderRadius: 10,
                         }}
                       >
-                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                          🏪 Minimarket -
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Feather
+                            name="shopping-cart"
+                            size={20}
+                            color="#7D7F88"
+                          />
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              marginLeft: 10,
+                              color: "#7D7F88",
+                            }}
+                          >
+                            Minimarket{" "}
+                          </Text>
+                        </View>
                         <Text style={styles.facility}>
                           {nearbyServices?.groceryShopping}
                         </Text>
                       </View>
                       <View
                         style={{
-                          padding: 20,
                           backgroundColor: "white",
-                          elevation: 2,
-                          shadowColor: "grey",
-                          shadowRadius: 10,
                           margin: 10,
                           borderRadius: 10,
                         }}
                       >
-                        <View>
-                          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                            🏥 Hospital
+                        <View style={{ flexDirection: "row" }}>
+                          <View
+                            style={{ flexDirection: "row", marginRight: 10 }}
+                          >
+                            <FontAwesome6
+                              name="hospital"
+                              size={20}
+                              color="#7D7F88"
+                            />
+                          </View>
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              color: "#7D7F88",
+                            }}
+                          >
+                            Hospital
                           </Text>
                         </View>
                         <Text style={styles.facility}>
@@ -162,36 +380,59 @@ export default function PropertyDetailScreen() {
                     <View>
                       <View
                         style={{
-                          padding: 20,
                           backgroundColor: "white",
-                          elevation: 2,
-                          shadowColor: "grey",
-                          shadowRadius: 10,
                           margin: 10,
                           borderRadius: 10,
                         }}
                       >
-                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                          🚉 Bus station
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Feather
+                            name="shopping-cart"
+                            size={20}
+                            color="#7D7F88"
+                          />
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              marginLeft: 10,
+                              color: "#7D7F88",
+                            }}
+                          >
+                            Bus Stop{" "}
+                          </Text>
+                        </View>
                         <Text style={styles.facility}>
                           {nearbyServices?.busStop}
                         </Text>
                       </View>
                       <View
                         style={{
-                          padding: 20,
                           backgroundColor: "white",
-                          elevation: 2,
-                          shadowColor: "grey",
-                          shadowRadius: 10,
                           margin: 10,
                           borderRadius: 10,
                         }}
                       >
-                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                          🚉 Bus station
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <View
+                            style={{ flexDirection: "row", marginRight: 10 }}
+                          >
+                            <FontAwesome6
+                              name="hospital"
+                              size={20}
+                              color="#7D7F88"
+                            />
+                          </View>
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: "bold",
+                              color: "#7D7F88",
+                            }}
+                          >
+                            Bus Stop
+                          </Text>
+                        </View>
                         <Text style={styles.facility}>
                           {nearbyServices?.busStop}
                         </Text>
@@ -248,18 +489,6 @@ export default function PropertyDetailScreen() {
                     </Text>
                   </View>
                 </View>
-
-                <View style={styles.footer}>
-                  <View>
-                    <Text style={styles.footerPrice}>$526 / month</Text>
-                    <Text style={styles.footerEstimation}>
-                      Payment estimation
-                    </Text>
-                  </View>
-                  <TouchableOpacity style={styles.contactButton}>
-                    <Text style={styles.contactText}>Contact</Text>
-                  </TouchableOpacity>
-                </View>
               </View>
             );
           })}
@@ -280,7 +509,7 @@ export default function PropertyDetailScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
-  image: { width: "100%", height: 220 },
+  image: { width: "100%", height: 300 },
   videoButton: {
     borderWidth: 1,
     borderColor: "#5B4FE0",
@@ -293,7 +522,7 @@ const styles = StyleSheet.create({
     color: "#5B4FE0",
     fontWeight: "500",
   },
-  content: { paddingHorizontal: 16 },
+  content: { paddingHorizontal: 16, marginBottom: 50 },
   title: {
     fontSize: 18,
     fontWeight: "bold",
@@ -315,9 +544,11 @@ const styles = StyleSheet.create({
   section: { marginBottom: 24 },
   sectionTitle: {
     fontWeight: "bold",
-    fontSize: 16,
-    color: "#1F1D5B",
+    fontSize: 20,
+    color: "black",
     marginBottom: 8,
+    marginTop: 10,
+    fontFamily: "Hind-Jalandhar-Bold",
   },
   facility: { fontSize: 14, marginVertical: 2, color: "#333" },
   map: { width: "100%", height: 150, borderRadius: 8, marginVertical: 12 },
