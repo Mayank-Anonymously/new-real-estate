@@ -489,21 +489,6 @@ export default function PropertyDetailScreen() {
                     </Text>
                   </View>
                 </View>
-<<<<<<< HEAD
-
-                <View style={styles.footer}>
-                  <View>
-                    <Text style={styles.footerPrice}>$526 / month</Text>
-                    <Text style={styles.footerEstimation}>
-                      Payment estimation
-                    </Text>
-                  </View>
-                  <TouchableOpacity style={styles.contactButton}>
-                    <Text style={styles.contactText}>Contact</Text>
-                  </TouchableOpacity>
-                </View>
-=======
->>>>>>> 4e3450b4b305e2596ad4b24cc3c50c2a07e85f73
               </View>
             );
           })}
