@@ -25,56 +25,45 @@ const SplashScreen = () => {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <ExpoStatusBar style="light" backgroundColor="white" />
-      <ImageBackground
+      <Image
         source={require("../../assets/images/background/splash_background.png")}
         style={styles.content}
-      >
-        <Image
-          source={require("../../assets/images/showcase_images/splash.png")}
-          style={{
-            resizeMode: "contain",
-            width: 400,
-            height: 200,
-            marginBottom: 80,
-          }}
-        />
+      />
 
-        <View style={{ marginLeft: 20 }}>
-          <Text style={[styles.text, { fontSize: 21, fontStyle: "italic" }]}>
-            Welcome to{" "}
-          </Text>
-          <Text style={[styles.text, { fontSize: 46, fontWeight: "bold" }]}>
-            NJ housing
-          </Text>
-          <Text
-            style={[
-              styles.text,
-              {
-                fontSize: 15,
-                color: "gray",
-                marginTop: 20,
-                fontWeight: "200",
-              },
-            ]}
-          >
-            Find the tenant, list your property in just a simple steps, in your
-            hand.
-          </Text>
-          <Text
-            style={[
-              styles.text,
-              {
-                fontSize: 15,
-                color: "gray",
-                marginTop: 30,
-                fontWeight: "200",
-              },
-            ]}
-          >
-            You are one step away.
-          </Text>
-        </View>
+      <View style={{ marginLeft: 20, justifyContent: "flex-end", top: "60%" }}>
+        <Text style={[styles.text, { fontSize: 21, fontStyle: "italic" }]}>
+          Welcome to{" "}
+        </Text>
+        <Text style={[styles.text, { fontSize: 46, fontWeight: "bold" }]}>
+          NJ housing
+        </Text>
+        <Text
+          style={[
+            styles.text,
+            {
+              fontSize: 15,
+              color: "gray",
+              marginTop: 20,
+              fontWeight: "200",
+            },
+          ]}
+        >
+          Find the tenant, list your property in just a simple steps, in your
+          hand.
+        </Text>
+        <Text
+          style={[
+            styles.text,
+            {
+              fontSize: 15,
+              color: "gray",
+              marginTop: 30,
+              fontWeight: "200",
+            },
+          ]}
+        >
+          You are one step away.
+        </Text>
 
         <Button
           mode="contained"
@@ -84,7 +73,7 @@ const SplashScreen = () => {
         >
           GET STARTED
         </Button>
-      </ImageBackground>
+      </View>
     </SafeAreaView>
   );
 };
@@ -94,15 +83,15 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    height: 400,
+    justifyContent: "space-between",
     backgroundColor: "white",
   },
   content: {
-    flex: 1,
     justifyContent: "center",
+    width: "100%",
+    height: 600,
     // alignItems: "center",
-    height: 400,
+    position: "absolute",
   },
   text: {
     fontSize: 12,
