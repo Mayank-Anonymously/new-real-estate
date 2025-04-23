@@ -43,9 +43,6 @@ export default function PropertyDetailScreen() {
     setData(property_details);
   }, []);
 
-  console.log("title:", title);
-  console.log("title:", rent);
-
   return (
     <>
       <ScrollView style={styles.container}>
