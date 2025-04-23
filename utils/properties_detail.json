@@ -920,7 +920,7 @@
       "accessibility": {
         "counterVanity": "Both Lowered With Min 27\" High Knee Space",
         "doorFaucetHandles": "Lever Handles On Both Doors And Faucets",
-        "kitchenAccessibility": "Standard",
+        "kitchen": "Standard",
         "bathroomAccessibility": "Walk-in Shower; Bath Grab Bars or Reinforcements; Toilet Grab Bars or Reinforcements"
       },
       "safety": {
@@ -1022,7 +1022,7 @@
       "accessibility": {
         "counterVanity": "Standard Height Counters and Vanity",
         "doorFaucetHandles": "Lever Handles On Both Doors And Faucets",
-        "kitchenAccessibility": "Standard",
+        "kitchen": "Standard",
         "bathroomAccessibility": "Standard"
       },
       "safety": {
@@ -1755,7 +1755,7 @@
       "accessibility": {
         "counterVanity": "Standard Height Counters and Vanity",
         "doorFaucetHandles": "Lever Handles On Both Doors And Faucets",
-        "kitchenAccessibility": "Front Controls on Stove/Cook-top; Non-digital Kitchen Appliances",
+        "kitchen": "Front Controls on Stove/Cook-top; Non-digital Kitchen Appliances",
         "bathroomAccessibility": "Accessible Height Toilet; 'T' Turn or 60\" Turning Circle in Bathrooms; Toilet Grab Bars or Reinforcements; Bath Grab Bars or Reinforcements"
       },
       "safety": {
@@ -1822,7 +1822,7 @@
         "type": "Apartment",
         "sizeSqFt": null,
         "yearBuilt": 2021
-      },
+      },  
       "contact": {
         "name": "Property Manager",
         "company": "Pennrose Management Company",
@@ -1867,7 +1867,7 @@
       "accessibility": {
         "counterVanity": "Standard Height Counters and Vanity",
         "doorFaucetHandles": "Non-lever handles On Doors And Faucets",
-        "kitchenAccessibility": "Standard",
+        "kitchen": "Standard",
         "bathroomAccessibility": "Standard"
       },
       "safety": {
@@ -1904,7 +1904,7 @@
       "address": "1 Thompson Avenue, Dover, NJ 07801",
       "status": "Waiting List",
       "incomeRestricted": true,
-      "rent": "N/A",
+      "rent": 443,
       "leaseTerm": "One Year",
       "utilitiesIncluded": ["Water", "Sewer", "Trash Pickup"],
       "applicationFee": "$25 Per Adult",
@@ -1960,7 +1960,7 @@
       "accessibility": {
         "counterVanity": "Standard Height Counters and Vanity",
         "doorFaucetHandles": "Non-lever handles On Doors And Faucets",
-        "kitchenAccessibility": "Standard",
+        "kitchen": "Standard",
         "bathroomAccessibility": "Standard"
       },
       "safety": {
@@ -1997,7 +1997,7 @@
       "address": "1 Thompson Avenue, Dover, NJ 07801",
       "status": "Waiting List",
       "incomeRestricted": true,
-      "rent": "N/A",
+      "rent": 554,
       "leaseTerm": "One Year",
       "utilitiesIncluded": ["Water", "Sewer", "Trash Pickup"],
       "applicationFee": "$25 Per Adult",
@@ -2053,7 +2053,7 @@
       "accessibility": {
         "counterVanity": "Standard Height Counters and Vanity",
         "doorFaucetHandles": "Non-lever handles On Doors And Faucets",
-        "kitchenAccessibility": "Standard",
+        "kitchen": "Standard",
         "bathroomAccessibility": "Standard"
       },
       "safety": {

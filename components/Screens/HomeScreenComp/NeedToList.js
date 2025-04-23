@@ -5,12 +5,14 @@ import { ScrollView } from "react-native";
 import { Button, Paragraph } from "react-native-paper";
 import InternationalMigrations from "../../cards/DestinationCards";
 import states from "../../../utils/County.json";
+import { useNavigation } from "@react-navigation/native";
 const height = Dimensions.get("window").height;
 const NeedToList = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{ backgroundColor: "white" }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 40 }}>
           Near your location
         </Text>
         <View
@@ -27,6 +29,7 @@ const NeedToList = () => {
             style={{ width: 50, height: 40 }}
             labelStyle={{ fontSize: 12 }}
             mode="text"
+            onPress={() => navigation.navigate("Explore")}
           >
             See all
           </Button>
@@ -41,6 +44,8 @@ const NeedToList = () => {
                     onPress={() =>
                       navigation.navigate("PropertyDetail", {
                         title: item.title,
+                        rent: item.price,
+                        image: item.image,
                       })
                     }
                     title={item.title}
@@ -79,6 +84,8 @@ const NeedToList = () => {
                     onPress={() =>
                       navigation.navigate("PropertyDetail", {
                         title: item.title,
+                        rent: item.price,
+                        image: item.image,
                       })
                     }
                     title={item.title}

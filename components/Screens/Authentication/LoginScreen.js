@@ -15,58 +15,80 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
-
+  const [error, setErros] = useState("");
   const handleLogin = () => {
-    if (user.email === email && user.password === password) {
+    if (user.email !== email) {
+      setErros("Email you have entered is incorrect");
+    } else if (user.password !== password) {
+      setErros("Password you have entered is incorrect");
+    } else if (user.email === email && user.password === password) {
       navigation.navigate("Root");
     }
   };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titleBrand}>Nj Housing</Text>
-      <Text style={styles.title}>Sign in</Text>
+      <View style={{ padding: 25 }}>
+        <Text style={styles.titleBrand}>Nj Housing</Text>
+        <Text style={styles.title}>Sign in</Text>
 
-      <Text style={styles.label}>YOUR EMAIL</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="yourmail@shrestha.com"
-        placeholderTextColor="#999"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        value={email}
-        onChangeText={setEmail}
-      />
-
-      <Text style={styles.label}>PASSWORD</Text>
-      <View style={styles.passwordContainer}>
+        <Text style={styles.label}>YOUR EMAIL</Text>
         <TextInput
-          style={styles.inputPassword}
-          placeholder="••••••••"
+          style={styles.input}
+          placeholder="yourmail@shrestha.com"
           placeholderTextColor="#999"
-          secureTextEntry={!showPassword}
-          value={password}
-          onChangeText={setPassword}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
         />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Ionicons
-            name={showPassword ? "eye" : "eye-off"}
-            size={24}
-            color="#999"
+
+        <Text style={styles.label}>PASSWORD</Text>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.inputPassword}
+            placeholder="••••••••"
+            placeholderTextColor="#999"
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
           />
+
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons
+              name={showPassword ? "eye" : "eye-off"}
+              size={24}
+              color="#999"
+            />
+          </TouchableOpacity>
+        </View>
+        {error && (
+          <View
+            style={{
+              backgroundColor: "#ffd1d1",
+              borderWidth: 1,
+              borderColor: "#ff0000",
+              padding: 20,
+              borderRadius: 10,
+              marginBottom: 10,
+            }}
+          >
+            <Text style={{ color: "#FF5D5D" }}>{error}</Text>
+          </View>
+        )}
+
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.signupPrompt}>Don’t have an account?</Text>
+        <TouchableOpacity
+          style={styles.signupButton}
+          onPress={() => navigation.navigate("Signup")}
+        >
+          <Text style={styles.signupText}>Create an Account</Text>
         </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.loginText}>Login</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.signupPrompt}>Don’t have an account?</Text>
-      <TouchableOpacity
-        style={styles.signupButton}
-        onPress={() => navigation.navigate("Signup")}
-      >
-        <Text style={styles.signupText}>Create an Account</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -75,7 +97,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 24,
     justifyContent: "center",
   },
   titleBrand: {
@@ -83,17 +104,20 @@ const styles = StyleSheet.create({
     color: "#1F1D5B",
     fontWeight: "500",
     marginBottom: 4,
+    fontFamily: "Hind-Jalandhar",
   },
   title: {
     fontSize: 40,
     fontWeight: "700",
     color: "#1F1D5B",
     marginBottom: 32,
+    fontFamily: "Hind-Jalandhar",
   },
   label: {
     fontSize: 12,
     color: "#999",
     marginBottom: 6,
+    fontFamily: "Hind-Jalandhar",
   },
   input: {
     backgroundColor: "#F2F2F2",

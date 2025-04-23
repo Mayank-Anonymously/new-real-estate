@@ -112,7 +112,7 @@ const RootStackNavigator = () => {
 
       <RootStack.Screen
         name="PropertyDetail"
-        options={{ headerShown: true, headerTitle: "" }}
+        options={{ headerShown: false, headerTitle: "" }}
         component={PropertyDetailScreen}
       ></RootStack.Screen>
 

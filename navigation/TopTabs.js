@@ -1,6 +1,6 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigationState } from "@react-navigation/native";
-import { View, Text } from "react-native";
+import { View, Text, Platform } from "react-native";
 import AvailableforRent from "../components/Screens/HomeScreenComp/AvailableforRent";
 import NeedToList from "../components/Screens/HomeScreenComp/NeedToList";
 import { LinearGradient } from "expo-linear-gradient";
@@ -15,12 +15,12 @@ const TopTabs = () => {
       screenOptions={({ route }) => ({
         tabBarShowLabel: true,
         tabBarItemStyle: {
-          width: width / 2.5,
-          padding: 10,
+          width: Platform.OS === "ios" ? width / 2.5 : width / 2.6,
+          padding: Platform.OS === "ios" ? 5 : 5,
         },
         tabBarIndicatorStyle: {
-          height: "100%",
-          borderRadius: 25,
+          height: "50%",
+          borderRadius: 50,
           backgroundColor: "transparent",
         },
         tabBarStyle: {
@@ -33,6 +33,7 @@ const TopTabs = () => {
           height: 60,
           overflow: "hidden",
           margin: 10,
+          width: width / 1.2,
         },
         tabBarLabel: ({ focused }) => (
           <View
@@ -61,7 +62,8 @@ const TopTabs = () => {
               style={{
                 color: focused ? "#fff" : "#999",
                 fontWeight: "600",
-                margin: 10,
+                padding: Platform.OS === "ios" ? 17 : 15,
+                fontSize: 13,
               }}
             >
               {route.name}

@@ -8,13 +8,13 @@ const LocationHeader = () => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <View>
+        {/* <View>
           <Entypo
             name="menu"
             size={25}
             onPress={() => navigation.openDrawer()}
           />
-        </View>
+        </View> */}
         <View>
           <Text style={{ marginLeft: 10, fontWeight: 100 }}>
             Your Current Location

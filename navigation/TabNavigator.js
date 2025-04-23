@@ -48,8 +48,8 @@ const TabNavigator = () => (
       component={ExploreScreen}
       options={{ headerShown: true }}
     />
-    <Tab.Screen name="Chat" component={ChatScreen} />
-    <Tab.Screen name="Saved" component={SavedScreens} />
+    {/* <Tab.Screen name="Chat" component={ChatScreen} /> */}
+    {/* <Tab.Screen name="Saved" component={SavedScreens} /> */}
     <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
 );

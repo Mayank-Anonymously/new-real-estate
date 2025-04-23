@@ -10,7 +10,12 @@ const HomeScreen = ({ navigation }) => (
       <SearchBar />
       <View>
         <Text
-          style={{ fontSize: 22, marginHorizontal: 10, fontWeight: "bold" }}
+          style={{
+            fontSize: 22,
+            marginHorizontal: 10,
+            marginVertical: 20,
+            fontWeight: "bold",
+          }}
         >
           Welcome to NJ housing
         </Text>

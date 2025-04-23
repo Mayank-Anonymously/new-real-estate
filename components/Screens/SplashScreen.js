@@ -32,14 +32,21 @@ const SplashScreen = () => {
       >
         <Image
           source={require("../../assets/images/showcase_images/splash.png")}
-          style={{ resizeMode: "contain", width: 400, height: 200 }}
+          style={{
+            resizeMode: "contain",
+            width: 400,
+            height: 200,
+            marginBottom: 80,
+          }}
         />
 
         <View style={{ marginLeft: 20 }}>
-          <Text style={[styles.text, { fontSize: 27, fontStyle: "italic" }]}>
+          <Text style={[styles.text, { fontSize: 21, fontStyle: "italic" }]}>
             Welcome to{" "}
           </Text>
-          <Text style={[styles.text, { fontSize: 46 }]}>NJ housing</Text>
+          <Text style={[styles.text, { fontSize: 46, fontWeight: "bold" }]}>
+            NJ housing
+          </Text>
           <Text
             style={[
               styles.text,
@@ -89,15 +96,18 @@ const styles = StyleSheet.create({
     flex: 1,
     // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     height: 400,
+    backgroundColor: "white",
   },
   content: {
     flex: 1,
     justifyContent: "center",
     // alignItems: "center",
+    height: 400,
   },
   text: {
     fontSize: 12,
     fontWeight: "500",
     color: "black",
+    fontFamily: "Hind-Jalandhar",
   },
 });
