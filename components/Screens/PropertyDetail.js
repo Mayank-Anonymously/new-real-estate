@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,118 +7,274 @@ import {
   ScrollView,
   TouchableOpacity,
   Linking,
+  FlatList,
 } from "react-native";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons, Feather } from "@expo/vector-icons";
+import { useRoute } from "@react-navigation/native";
+import property_details from "../../utils/properties_detail.json";
+import { Avatar } from "react-native-paper";
 
 export default function PropertyDetailScreen() {
+  const route = useRoute();
+  const { title, image, rent } = route.params;
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(property_details);
+  }, []);
+
+  console.log("title:", title);
+  console.log("title:", rent);
+
   return (
-    <ScrollView style={styles.container}>
-      <Image
-        source={{
-          uri: "https://via.placeholder.com/400x200.png?text=House+Image",
-        }}
-        style={styles.image}
-      />
-      <TouchableOpacity style={styles.videoButton}>
-        <Text style={styles.videoButtonText}>Watch Intro video</Text>
-      </TouchableOpacity>
-
-      <View style={styles.content}>
-        <Text style={styles.title}>
-          Entire Bromo mountain view Cabin in Surabaya
-        </Text>
-        <Text style={styles.subtitle}>
-          ⭐ 4.1 (66 reviews) · 🛏 2 room · 📐 874 m²
-        </Text>
-        <Text style={styles.location}>📍Kapan, Jorpati</Text>
-
-        <View style={styles.ownerInfo}>
-          <Image
-            source={{ uri: "https://via.placeholder.com/40" }}
-            style={styles.ownerAvatar}
-          />
-          <View>
-            <Text style={styles.ownerName}>Bhuwan K.C</Text>
-            <Text style={styles.ownerRole}>Property owner</Text>
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Home facilities</Text>
-          <Text style={styles.facility}>🌬 Air conditioner</Text>
-          <Text style={styles.facility}>🍽 Kitchen</Text>
-          <Text style={styles.facility}>🚗 Free parking</Text>
-          <Text style={styles.facility}>📶 Free WiFi</Text>
-        </View>
-
+    <>
+      <ScrollView style={styles.container}>
         <Image
           source={{
-            uri: "https://via.placeholder.com/300x150.png?text=Map+Location",
+            uri: Image.resolveAssetSource(
+              require(`../../assets/images/property_image/brichwood.jpeg`)
+            ).uri,
           }}
-          style={styles.map}
+          style={styles.image}
         />
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Nearest public facilities</Text>
-          <Text style={styles.facility}>🏪 Minimarket - 200m</Text>
-          <Text style={styles.facility}>🏥 Hospital - 130m</Text>
-          <Text style={styles.facility}>🥣 Public canteen - 400m</Text>
-          <Text style={styles.facility}>🚉 Train station - 500m</Text>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>About location’s neighborhood</Text>
-          <Text style={styles.paragraph}>
-            This cabin comes with Smart Home System and beautiful viking style.
-            You can see sunrise in the morning with City View from full Glass
-            Window.
-          </Text>
-          <Text style={styles.paragraph}>
-            This unit is surrounded by business district of West Surabaya that
-            offers you the city life as well as wide range of culinary.
-          </Text>
-          <Text style={styles.paragraph}>
-            This apartment equipped with Washing Machine, Electric Stove,
-            Microwave, Refrigerator, Cutlery.
-          </Text>
-        </View>
-
-        <TouchableOpacity style={styles.advanceButton}>
-          <Text style={styles.advanceText}>Advance Payment</Text>
-          <Text style={styles.advanceAmount}>500$/month</Text>
+        <TouchableOpacity style={styles.videoButton}>
+          <Text style={styles.videoButtonText}>Watch Intro video</Text>
         </TouchableOpacity>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Testimonials</Text>
-          <View style={styles.testimonial}>
-            <Text style={styles.testimonialName}>Biggy Shahi ⭐⭐⭐⭐⭐</Text>
-            <Text style={styles.paragraph}>
-              My wife and I had a dream of downsizing from our house in Cape
-              Elizabeth into a small condo closer to where we work and play in
-              Portland...
-            </Text>
-          </View>
-          <View style={styles.testimonial}>
-            <Text style={styles.testimonialName}>C. J. Upohrel ⭐⭐⭐⭐⭐</Text>
-            <Text style={styles.paragraph}>
-              My wife & I have moved 6 times in the last 25 years. Obviously,
-              we’ve dealt with many realtors both on the buying and selling
-              side...
-            </Text>
-          </View>
-        </View>
+        {data
+          .filter(
+            (iex) => iex.property.name === title && iex.property.rent === rent
+          )
+          .map((item, index) => {
+            var unit = item.property.unit;
+            var utilities = item.property.utilities;
+            var parking = item.property.parkingAndEntry;
+            var nearbyServices = item.property.nearbyServices;
 
-        <View style={styles.footer}>
-          <View>
-            <Text style={styles.footerPrice}>$526 / month</Text>
-            <Text style={styles.footerEstimation}>Payment estimation</Text>
-          </View>
-          <TouchableOpacity style={styles.contactButton}>
-            <Text style={styles.contactText}>Contact</Text>
-          </TouchableOpacity>
+            return (
+              <View style={styles.content}>
+                <Text style={styles.title}>{item.property.name} </Text>
+                <Text style={styles.subtitle}>
+                  ⭐ 4.1 (66 reviews) · 🛏 {unit.bedrooms} room · 📐{" "}
+                  {unit.sizeSqFt} sqft
+                </Text>
+                <Text style={styles.location}>📍{item.property.address}</Text>
+
+                <View style={styles.ownerInfo}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Image
+                      source={require("../../assets/avatars/female.png")}
+                      style={styles.ownerAvatar}
+                    />
+                    <View>
+                      <Text style={styles.ownerName}>Bhuwan K.C</Text>
+                      <Text style={styles.ownerRole}>Property owner</Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      alignItems: "center",
+                      shadowColor: "red",
+                      shadowRadius: 4,
+                      elevation: 10,
+                      padding: 10,
+                      shadowOpacity: 5,
+                    }}
+                  >
+                    <Feather name="phone-call" size={20} />
+                  </View>
+                </View>
+
+                <View
+                  style={{
+                    backgroundColor: "#D6D6D6",
+                    width: "100%",
+                    height: 1,
+                    marginBottom: 50,
+                  }}
+                />
+
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>Home facilities</Text>
+                  <Text style={styles.facility}>
+                    🌬 Air conditioner {utilities?.airConditioner}
+                  </Text>
+                  <Text style={styles.facility}>
+                    🍽 Heating{utilities?.heating}
+                  </Text>
+                  <Text style={styles.facility}>
+                    🚗 Free parking {parking?.allottedParkingSpaces}
+                  </Text>
+                </View>
+
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>
+                    Nearest public facilities
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      aligItems: "center",
+                    }}
+                  >
+                    <View>
+                      <View
+                        style={{
+                          padding: 20,
+                          backgroundColor: "white",
+                          elevation: 2,
+                          shadowColor: "grey",
+                          shadowRadius: 10,
+                          margin: 10,
+                          borderRadius: 10,
+                        }}
+                      >
+                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                          🏪 Minimarket -
+                        </Text>
+                        <Text style={styles.facility}>
+                          {nearbyServices?.groceryShopping}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          padding: 20,
+                          backgroundColor: "white",
+                          elevation: 2,
+                          shadowColor: "grey",
+                          shadowRadius: 10,
+                          margin: 10,
+                          borderRadius: 10,
+                        }}
+                      >
+                        <View>
+                          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                            🏥 Hospital
+                          </Text>
+                        </View>
+                        <Text style={styles.facility}>
+                          {nearbyServices?.hospital}
+                        </Text>
+                      </View>
+                    </View>
+                    <View>
+                      <View
+                        style={{
+                          padding: 20,
+                          backgroundColor: "white",
+                          elevation: 2,
+                          shadowColor: "grey",
+                          shadowRadius: 10,
+                          margin: 10,
+                          borderRadius: 10,
+                        }}
+                      >
+                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                          🚉 Bus station
+                        </Text>
+                        <Text style={styles.facility}>
+                          {nearbyServices?.busStop}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          padding: 20,
+                          backgroundColor: "white",
+                          elevation: 2,
+                          shadowColor: "grey",
+                          shadowRadius: 10,
+                          margin: 10,
+                          borderRadius: 10,
+                        }}
+                      >
+                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                          🚉 Bus station
+                        </Text>
+                        <Text style={styles.facility}>
+                          {nearbyServices?.busStop}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>Property Comments</Text>
+                  <Text style={styles.paragraph}>
+                    {item.property.propertyComments}
+                  </Text>
+
+                  <Text style={styles.paragraph}>
+                    This apartment equipped with Washing Machine, Electric
+                    Stove, Microwave, Refrigerator, Cutlery.
+                  </Text>
+                </View>
+
+                <TouchableOpacity style={styles.advanceButton}>
+                  <Text style={styles.advanceText}>Advance Payment</Text>
+                  <Text style={styles.advanceAmount}>500$/month</Text>
+                </TouchableOpacity>
+
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>Testimonials</Text>
+                  <View style={styles.testimonial}>
+                    <Avatar.Image
+                      size={44}
+                      source={require("../../assets/avatars/male.png")}
+                    />
+                    <Text style={styles.testimonialName}>
+                      Biggy Shahi ⭐⭐⭐⭐⭐
+                    </Text>
+                    <Text style={styles.paragraph}>
+                      My wife and I had a dream of downsizing from our house in
+                      Cape Elizabeth into a small condo closer to where we work
+                      and play in Portland...
+                    </Text>
+                  </View>
+                  <View style={styles.testimonial}>
+                    <Avatar.Image
+                      size={44}
+                      source={require("../../assets/avatars/male.png")}
+                    />
+                    <Text style={styles.testimonialName}>
+                      C. J. Upohrel ⭐⭐⭐⭐⭐
+                    </Text>
+                    <Text style={styles.paragraph}>
+                      My wife & I have moved 6 times in the last 25 years.
+                      Obviously, we’ve dealt with many realtors both on the
+                      buying and selling side...
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={styles.footer}>
+                  <View>
+                    <Text style={styles.footerPrice}>$526 / month</Text>
+                    <Text style={styles.footerEstimation}>
+                      Payment estimation
+                    </Text>
+                  </View>
+                  <TouchableOpacity style={styles.contactButton}>
+                    <Text style={styles.contactText}>Contact</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })}
+      </ScrollView>
+      {/* Footer fixed at the bottom */}
+      <View style={styles.footerFixed}>
+        <View>
+          <Text style={styles.footerPrice}>$526 / month</Text>
+          <Text style={styles.footerEstimation}>Payment estimation</Text>
         </View>
+        <TouchableOpacity style={styles.contactButton}>
+          <Text style={styles.contactText}>Contact</Text>
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+    </>
   );
 }
 
@@ -146,7 +302,13 @@ const styles = StyleSheet.create({
   },
   subtitle: { color: "#555", marginBottom: 2 },
   location: { color: "#555", marginBottom: 12 },
-  ownerInfo: { flexDirection: "row", alignItems: "center", marginBottom: 16 },
+  ownerInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    marginTop: 16,
+  },
   ownerAvatar: { width: 40, height: 40, borderRadius: 20, marginRight: 10 },
   ownerName: { fontWeight: "bold", color: "#1F1D5B" },
   ownerRole: { fontSize: 12, color: "#888" },
@@ -191,4 +353,18 @@ const styles = StyleSheet.create({
     borderRadius: 24,
   },
   contactText: { color: "#fff", fontWeight: "600" },
+  footerFixed: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderTopColor: "#eee",
+    borderTopWidth: 1,
+    backgroundColor: "#fff",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
 });

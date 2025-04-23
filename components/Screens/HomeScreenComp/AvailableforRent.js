@@ -1,18 +1,21 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import PropertyCard from "../../cards/ProppertCard";
 import { ScrollView } from "react-native";
 import { Button, Paragraph } from "react-native-paper";
 import InternationalMigrations from "../../cards/DestinationCards";
-
+import { useNavigation } from "@react-navigation/native";
+import states from "../../../utils/County.json";
 const height = Dimensions.get("window").height;
 const AvailableforRent = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={{ backgroundColor: "white" }}>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>
           Near your location
         </Text>
+
         <View
           style={{
             flexDirection: "row",
@@ -20,9 +23,7 @@ const AvailableforRent = () => {
             alignItems: "center",
           }}
         >
-          <Paragraph style={{ color: "grey" }}>
-            243 Properties in Surabaya
-          </Paragraph>
+          <Paragraph style={{ color: "grey" }}>4 Properties in Dover</Paragraph>
           <Button
             style={{ width: 50, height: 40 }}
             labelStyle={{ fontSize: 12 }}
@@ -33,10 +34,25 @@ const AvailableforRent = () => {
         </View>
         <View>
           <ScrollView horizontal={true}>
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
+            {states
+              .filter((ite) => ite.address.includes("Dover"))
+              .map((item, index) => {
+                return (
+                  <PropertyCard
+                    onPress={() =>
+                      navigation.navigate("PropertyDetail", {
+                        title: item.title,
+                        image: item.image,
+                      })
+                    }
+                    title={item.title}
+                    location={item.address}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                  />
+                );
+              })}
           </ScrollView>
         </View>
         <View>
@@ -57,10 +73,24 @@ const AvailableforRent = () => {
             </Button>
           </View>
           <ScrollView horizontal={true}>
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
+            {states
+              .filter((ite) => ite.address.includes("Clifton"))
+              .map((item, index) => {
+                return (
+                  <PropertyCard
+                    onPress={() =>
+                      navigation.navigate("PropertyDetail", {
+                        title: item.title,
+                      })
+                    }
+                    title={item.title}
+                    location={item.address}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                  />
+                );
+              })}
           </ScrollView>
         </View>
         <InternationalMigrations />

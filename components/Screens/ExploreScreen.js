@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import RealEstateMap from "../ScreensComponents/exploreScreen/PropertyMap";
+import Propertlistings from "../Listings/PropertyListings";
 
 const ExploreScreen = () => {
   return (
     <View>
-      <RealEstateMap />
-      <>ExploreScreen</>
+      <Propertlistings />
     </View>
   );
 };

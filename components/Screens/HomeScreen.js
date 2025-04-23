@@ -12,7 +12,7 @@ const HomeScreen = ({ navigation }) => (
         <Text
           style={{ fontSize: 22, marginHorizontal: 10, fontWeight: "bold" }}
         >
-          Welcome to Rentaxo
+          Welcome to NJ housing
         </Text>
       </View>
       <TopTabs />

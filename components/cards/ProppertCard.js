@@ -6,48 +6,59 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  Pressable,
 } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
-const PropertyCard = () => {
+const PropertyCard = ({
+  onPress,
+  title,
+  location,
+  price,
+  description,
+  image,
+}) => {
+  const imagevar = image ? image : "";
   return (
-    <View style={styles.card}>
-      <Image
-        source={require("../../assets/images/cards/card-one.png")} // Replace with actual image
-        style={styles.image}
-      />
-      <View style={styles.content}>
-        <View style={styles.ratingRow}>
-          <FontAwesome name="star" size={14} color="#FFA500" />
-          <Text style={styles.ratingText}>4.8 (73)</Text>
-        </View>
-        <Text style={styles.title}>
-          Small cottage with great view of bagmati
-        </Text>
-        <Text style={styles.location}>Kadaghari, Kathmandu</Text>
-
-        <View style={styles.infoRow}>
-          <View style={styles.iconText}>
-            <Ionicons name="bed-outline" size={16} color="#888" />
-            <Text style={styles.infoText}>2 room</Text>
+    <Pressable onPress={onPress}>
+      <View style={styles.card}>
+        <Image
+          source={{
+            uri: Image.resolveAssetSource(
+              require(`../../assets/images/property_image/brichwood.jpeg`)
+            ).uri,
+          }}
+          style={styles.image}
+        />
+        <View style={styles.content}>
+          <View style={styles.ratingRow}>
+            <FontAwesome name="star" size={14} color="#FFA500" />
+            <Text style={styles.ratingText}>4.8 (73)</Text>
           </View>
-          <View style={styles.iconText}>
-            <Ionicons name="expand-outline" size={16} color="#888" />
-            <Text style={styles.infoText}>673 m²</Text>
-          </View>
-        </View>
+          <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+            {title}
+          </Text>
+          <Text style={styles.location}>{location}</Text>
 
-        <View style={styles.footer}>
-          <Text style={styles.price}>$526</Text>
-          <Text style={styles.perMonth}>/ month</Text>
-          <TouchableOpacity>
-            <Ionicons name="heart-outline" size={20} color="#aaa" />
-          </TouchableOpacity>
+          <View style={styles.infoRow}>
+            <View style={styles.iconText}>
+              <Ionicons name="bed-outline" size={16} color="#888" />
+              <Text style={styles.infoText}>{description}</Text>
+            </View>
+          </View>
+
+          <View style={styles.footer}>
+            <Text style={styles.price}>${price}</Text>
+            <Text style={styles.perMonth}>/ month</Text>
+            <TouchableOpacity>
+              <Ionicons name="heart-outline" size={20} color="#aaa" />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -59,22 +70,26 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: "hidden",
     margin: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
     elevation: 3,
     width: width / 1.2,
     flexDirection: "row",
     height: height / 4,
+    shadowColor: "whitesmoke",
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowOffset: {
+      x: 1,
+      y: 1,
+    },
   },
   image: {
-    width: "20%",
+    width: 100,
     height: 180,
   },
   content: {
     padding: 14,
     marginTop: 10,
+    width: 220,
   },
   ratingRow: {
     flexDirection: "row",
@@ -88,7 +103,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
-    fontSize: 13,
+    fontSize: 12,
     marginBottom: 4,
     color: "#000",
   },

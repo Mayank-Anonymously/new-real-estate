@@ -43,7 +43,11 @@ const TabNavigator = () => (
     })}
   >
     <Tab.Screen name="Home" component={StackNavigator} />
-    <Tab.Screen name="Explore" component={ExploreScreen} screenOptions={{}} />
+    <Tab.Screen
+      name="Explore"
+      component={ExploreScreen}
+      options={{ headerShown: true }}
+    />
     <Tab.Screen name="Chat" component={ChatScreen} />
     <Tab.Screen name="Saved" component={SavedScreens} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
