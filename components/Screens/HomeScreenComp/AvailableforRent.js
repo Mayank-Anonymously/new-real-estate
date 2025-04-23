@@ -11,7 +11,7 @@ const AvailableforRent = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <View style={{ backgroundColor: "white" }}>
+      <View style={{ backgroundColor: "white", marginRight: 20 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 40 }}>
           Near your location
         </Text>
@@ -19,7 +19,7 @@ const AvailableforRent = () => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-between",  
             alignItems: "center",
           }}
         >

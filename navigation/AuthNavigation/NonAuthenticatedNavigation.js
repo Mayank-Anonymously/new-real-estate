@@ -17,7 +17,7 @@ const RootStack = createStackNavigator();
 const RootStackNavigator = () => {
   return (
     <RootStack.Navigator>
-      {/* <RootStack.Screen
+      <RootStack.Screen
         name="Splash"
         options={{ headerShown: false, headerTitle: "" }}
         component={SplashScreen}
@@ -33,7 +33,7 @@ const RootStackNavigator = () => {
         name="Signup"
         options={{ headerShown: false, headerTitle: "" }}
         component={SignupScreen}
-      ></RootStack.Screen> */}
+      ></RootStack.Screen>
       <RootStack.Screen
         name="Root"
         options={{ headerShown: false, headerTitle: "" }}

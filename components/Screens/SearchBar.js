@@ -12,6 +12,8 @@ const SearchBar = () => {
         value={searchQuery}
         style={{
           backgroundColor: "whitesmoke",
+          height: 48,
+          padding: -10,
         }}
       />
     </View>

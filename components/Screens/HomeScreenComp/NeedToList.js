@@ -11,7 +11,7 @@ const NeedToList = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <View style={{ backgroundColor: "white" }}>
+      <View style={{ backgroundColor: "white", marginRight: 20 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 40 }}>
           Near your location
         </Text>
