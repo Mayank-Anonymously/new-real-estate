@@ -11,19 +11,19 @@ const AvailableforRent = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <View style={{ backgroundColor: "white", marginRight: 20 }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 40 }}>
+      <View style={{ backgroundColor: "white", marginRight: 30 }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 20 }}>
           Near your location
         </Text>
 
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",  
+            justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          <Paragraph style={{ color: "grey" }}>4 Properties in Dover</Paragraph>
+          <Paragraph style={{ color: "grey" }}>Properties in Dover</Paragraph>
           <Button
             style={{ width: 50, height: 40 }}
             labelStyle={{ fontSize: 12 }}

@@ -11,7 +11,7 @@ const NeedToList = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <View style={{ backgroundColor: "white", marginRight: 20 }}>
+      <View style={{ backgroundColor: "white", marginRight: 30 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 40 }}>
           Near your location
         </Text>
@@ -23,7 +23,7 @@ const NeedToList = () => {
           }}
         >
           <Paragraph style={{ color: "grey" }}>
-            7 Properties in Hopewell Township
+            Properties in Hopewell Township
           </Paragraph>
           <Button
             style={{ width: 50, height: 40 }}

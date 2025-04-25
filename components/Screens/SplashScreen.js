@@ -69,7 +69,12 @@ const SplashScreen = () => {
           mode="contained"
           onPress={() => navigation.navigate("Login")}
           buttonColor="#567DF4"
-          style={{ borderRadius: 9, marginHorizontal: 20, marginTop: 50 }}
+          style={{
+            borderRadius: 9,
+            backgroundColor: "#3E5BF5",
+            marginHorizontal: 10,
+            marginTop: 20,
+          }}
         >
           GET STARTED
         </Button>

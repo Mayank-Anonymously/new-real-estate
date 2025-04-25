@@ -17,14 +17,14 @@ import {
   MaterialIcons,
   FontAwesome6,
 } from "@expo/vector-icons";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import property_details from "../../utils/properties_detail.json";
 import { Avatar } from "react-native-paper";
 
 export default function PropertyDetailScreen() {
   const route = useRoute();
   const { title, image, rent } = route.params;
-
+  const navigation = useNavigation();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function PropertyDetailScreen() {
 
   return (
     <>
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View
           style={{
             position: "absolute",
@@ -68,7 +68,11 @@ export default function PropertyDetailScreen() {
               height: 50,
             }}
           >
-            <EvilIcons name="arrow-left" size={33} />
+            <EvilIcons
+              name="arrow-left"
+              onPress={() => navigation.goBack()}
+              size={33}
+            />
           </View>
           <View
             style={{

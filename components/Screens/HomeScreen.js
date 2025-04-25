@@ -6,6 +6,7 @@ import {
   Pressable,
   Animated,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import LocationHeader from "../common/LocationHeader";
 import SearchBar from "./SearchBar";
@@ -51,7 +52,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <LocationHeader />
       <SearchBar />
 
@@ -92,7 +93,7 @@ const HomeScreen = () => {
           <NeedToList />
         </View>
       </Animated.View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -101,12 +102,11 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#FCFCFC",
     paddingHorizontal: 10,
-    paddingTop: 50,
   },
   welcomeText: {
-    fontSize: 22,
+    fontSize: 17,
     marginHorizontal: 10,
     marginVertical: 20,
     fontWeight: "bold",
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 100,
     alignSelf: "center",
+    marginBottom: -10,
   },
   buttonBase: {
     width: 150,

@@ -8,18 +8,11 @@ const LocationHeader = () => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        {/* <View>
-          <Entypo
-            name="menu"
-            size={25}
-            onPress={() => navigation.openDrawer()}
-          />
-        </View> */}
         <View>
           <Text style={{ marginLeft: 10, fontWeight: 100 }}>
             Your Current Location
           </Text>
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
             <Foundation
               name="marker"
               color="#917AFD"

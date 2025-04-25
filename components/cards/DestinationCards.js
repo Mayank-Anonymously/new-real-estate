@@ -7,24 +7,42 @@ const InternationalMigrations = () => {
       <Text style={styles.title}>International Migrations</Text>
       <View style={styles.cardContainer}>
         <Card
-          imageSource={{ uri: "https://example.com/bali.jpg" }}
+          imageSource={{
+            uri: "https://www.shutterstock.com/image-photo/woman-backpack-exploring-bali-indonesia-600nw-1924363112.jpg",
+          }}
           title="Bali, Indonesia"
           subtitle="345 rented props"
         />
         <Card
-          imageSource={{ uri: "https://example.com/yogyakarta.jpg" }}
+          imageSource={{
+            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvOu3pUiwfD-vbV0j7cwtR04_1uTgoz5LxCQ&s",
+          }}
           title="Yogyakarta, Indonesia"
           subtitle="290 rented props"
         />
       </View>
       <View style={styles.hostSection}>
-        <Text style={styles.hostTitle}>Want to host your own place?</Text>
-        <Text style={styles.hostSubtitle}>
-          Earn passive income by renting or selling your
-        </Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Active as Landlord</Text>
-        </TouchableOpacity>
+        <View>
+          <Image
+            style={{
+              width: 100,
+              height: 150,
+              borderTopLeftRadius: 10,
+              borderBottomLeftRadius: 10,
+            }}
+            source={require("../../assets/images/active_landlord.png")}
+          />
+        </View>
+        <View>
+          <Text style={styles.hostTitle}>
+            Want to host your {"\n"} own place?
+          </Text>
+          <Text></Text>
+          <Text style={styles.hostSubtitle}>
+            Earn passive income by
+            {"\n"}renting or selling your
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -76,18 +94,24 @@ const styles = StyleSheet.create({
     color: "#888",
   },
   hostSection: {
-    padding: 16,
-    backgroundColor: "#e1bee7",
-    borderRadius: 8,
+    backgroundColor: "#6246EA",
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
   },
   hostTitle: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "white",
+    marginLeft: 40,
   },
   hostSubtitle: {
     fontSize: 14,
     marginBottom: 8,
+    marginLeft: 40,
+    color: "white",
   },
+
   button: {
     padding: 10,
     backgroundColor: "#7e57c2",
