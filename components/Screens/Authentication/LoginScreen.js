@@ -35,7 +35,7 @@ export default function LoginScreen() {
         <Text style={styles.label}>YOUR EMAIL</Text>
         <TextInput
           style={styles.input}
-          placeholder="yourmail@shrestha.com"
+          placeholder="Enter email"
           placeholderTextColor="#999"
           keyboardType="email-address"
           autoCapitalize="none"

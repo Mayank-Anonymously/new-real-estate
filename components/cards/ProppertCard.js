@@ -10,6 +10,7 @@ import {
   Platform,
 } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import CustomText from "../common/Text";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -36,9 +37,7 @@ const PropertyCard = ({
       <View style={styles.card}>
         <Image
           source={{
-            uri: Image.resolveAssetSource(
-              require(`../../assets/images/property_image/brichwood.jpeg`)
-            ).uri,
+            uri: image,
           }}
           style={styles.image}
         />
@@ -46,24 +45,28 @@ const PropertyCard = ({
           <View>
             <View style={styles.ratingRow}>
               <FontAwesome name="star" size={14} color="#FFA500" />
-              <Text style={styles.ratingText}>4.8 (73)</Text>
+              <CustomText style={styles.ratingText}>4.8 (73)</CustomText>
             </View>
-            <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+            <CustomText
+              style={styles.title}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
               {title}
-            </Text>
-            <Text style={styles.location}>{location}</Text>
+            </CustomText>
+            <CustomText style={styles.location}>{location}</CustomText>
 
             <View style={styles.infoRow}>
               <View style={styles.iconText}>
                 <Ionicons name="bed-outline" size={16} color="#888" />
-                <Text style={styles.infoText}>{description}</Text>
+                <CustomText style={styles.infoText}>{description}</CustomText>
               </View>
             </View>
           </View>
           <View style={styles.footer}>
             <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-              <Text style={styles.price}>${price}</Text>
-              <Text style={styles.perMonth}>/month</Text>
+              <CustomText style={styles.price}>${price}</CustomText>
+              <CustomText style={styles.perMonth}>/month</CustomText>
             </View>
             <TouchableOpacity>
               <Ionicons name="heart-outline" size={20} color="#aaa" />
@@ -115,23 +118,18 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     marginLeft: 4,
-    fontFamily: "Hind-Jalandhar",
 
-    fontSize: Platform.OS === "ios" ? 16 : 12,
+    fontSize: Platform.OS === "ios" ? 16 : 14,
     color: "#666",
   },
   title: {
     fontWeight: "bold",
-    fontFamily: "Hind-Jalandhar",
-
-    fontSize: Platform.OS === "ios" ? 16 : 12,
+    fontSize: Platform.OS === "ios" ? 16 : 13,
     marginBottom: 4,
     color: "#000",
   },
   location: {
-    fontFamily: "Hind-Jalandhar",
-
-    fontSize: Platform.OS === "ios" ? 16 : 12,
+    fontSize: Platform.OS === "ios" ? 15 : 13,
     color: "#999",
     marginBottom: 8,
   },
@@ -146,9 +144,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   infoText: {
-    fontFamily: "Hind-Jalandhar",
-
-    fontSize: Platform.OS === "ios" ? 16 : 12,
+    fontSize: Platform.OS === "ios" ? 13 : 12,
     color: "#666",
     marginLeft: 4,
   },
@@ -157,17 +153,15 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     marginBottom: 4,
+    marginRight: 20,
   },
   price: {
     fontWeight: "bold",
-    fontFamily: "Hind-Jalandhar",
 
     fontSize: Platform.OS === "ios" ? 18 : 16,
     color: "#000",
   },
   perMonth: {
-    fontFamily: "Hind-Jalandhar",
-
     fontSize: 12,
     color: "#666",
     marginLeft: 2,

@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar";
 import { LinearGradient } from "expo-linear-gradient";
 import AvailableforRent from "./HomeScreenComp/AvailableforRent";
 import NeedToList from "./HomeScreenComp/NeedToList";
+import CustomText from "../common/Text";
 
 const { width } = Dimensions.get("window");
 
@@ -21,47 +22,46 @@ const HomeScreen = () => {
   const translateX = useRef(new Animated.Value(0)).current;
   const indicatorX = useRef(new Animated.Value(0)).current;
 
-  const handleTabPress = (tab, index) => {
-    setActive(tab);
+  // const handleTabPress = (tab, index) => {
+  //   setActive(tab);
 
-    // Slide content
-    Animated.spring(translateX, {
-      toValue: -width * index,
-      useNativeDriver: true,
-    }).start();
+  //   // Slide content
+  //   Animated.spring(translateX, {
+  //     toValue: -width * index,
+  //     useNativeDriver: true,
+  //   }).start();
 
-    // Move indicator
-    Animated.spring(indicatorX, {
-      toValue: index * 150, // assuming button width of 150
-      useNativeDriver: true,
-    }).start();
-  };
+  //   // Move indicator
+  //   Animated.spring(indicatorX, {
+  //     toValue: index * 150, // assuming button width of 150
+  //     useNativeDriver: true,
+  //   }).start();
+  // };
 
-  const renderButton = (label, index) => {
-    const isActive = active === label;
+  // const renderButton = (label, index) => {
+  //   const isActive = active === label;
 
-    return (
-      <Pressable onPress={() => handleTabPress(label, index)}>
-        <View style={[styles.buttonBase, !isActive && styles.inactiveButton]}>
-          <Text style={[styles.buttonText, !isActive && { color: "black" }]}>
-            {label}
-          </Text>
-        </View>
-      </Pressable>
-    );
-  };
+  //   return (
+  //     <Pressable onPress={() => handleTabPress(label, index)}>
+  //       <View style={[styles.buttonBase, !isActive && styles.inactiveButton]}>
+  //         <Text style={[styles.buttonText, !isActive && { color: "black" }]}>
+  //           {label}
+  //         </Text>
+  //       </View>
+  //     </Pressable>
+  //   );
+  // };
 
   return (
     <ScrollView style={styles.container}>
       <LocationHeader />
       <SearchBar />
-
-      <Text style={styles.welcomeText}>Welcome to NJ housing</Text>
-
+      <CustomText style={{ fontSize: 20, marginVertical: 11 }}>
+        Welcome to NJ housing
+      </CustomText>
       {/* Toggle with sliding indicator */}
-      <View style={styles.toggleContainer}>
+      {/* <View style={styles.toggleContainer}>
         <View style={{ flexDirection: "row", position: "relative" }}>
-          {/* Sliding Indicator */}
           <Animated.View
             style={[
               styles.indicator,
@@ -73,10 +73,8 @@ const HomeScreen = () => {
           {renderButton("I need to rent", 0)}
           {renderButton("I want to list", 1)}
         </View>
-      </View>
-
-      {/* Sliding Tab Content */}
-      <Animated.View
+      </View> */}
+      {/* <Animated.View
         style={[
           styles.slider,
           {
@@ -92,7 +90,8 @@ const HomeScreen = () => {
         <View style={[styles.tabContent, { width }]}>
           <NeedToList />
         </View>
-      </Animated.View>
+      </Animated.View> */}
+      <AvailableforRent />
     </ScrollView>
   );
 };

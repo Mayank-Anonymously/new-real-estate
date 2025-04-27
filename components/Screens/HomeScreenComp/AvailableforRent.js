@@ -11,7 +11,7 @@ const AvailableforRent = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <View style={{ backgroundColor: "white", marginRight: 30 }}>
+      <View style={{ backgroundColor: "white", marginBottom: 60 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 20 }}>
           Near your location
         </Text>

@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Main from "./Main";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading"; // Optional fallback
+
 const App = () => {
-  useEffect(() => {
-    async function loadFonts() {
-      await Font.loadAsync({
-        "Hind-Jalandhar": require("./assets/fonts/Hind/Hind-Regular.ttf"),
-      });
-      setFontsLoaded(true);
-    }
-    loadFonts();
-  }, []);
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />; // or a loading spinner
+  }
 
   return (
     <NavigationContainer>

@@ -11,13 +11,14 @@ import { Foundation, AntDesign } from "react-native-vector-icons";
 import LoginScreen from "../../components/Screens/Authentication/LoginScreen";
 import SignupScreen from "../../components/Screens/Authentication/SignupScreen";
 import PropertyDetailScreen from "../../components/Screens/PropertyDetail";
+import ContactQueryForm from "../../components/ContactQueryForm";
 
 const RootStack = createStackNavigator();
 
 const RootStackNavigator = () => {
   return (
     <RootStack.Navigator>
-      <RootStack.Screen
+      {/* <RootStack.Screen
         name="Splash"
         options={{ headerShown: false, headerTitle: "" }}
         component={SplashScreen}
@@ -33,7 +34,7 @@ const RootStackNavigator = () => {
         name="Signup"
         options={{ headerShown: false, headerTitle: "" }}
         component={SignupScreen}
-      ></RootStack.Screen>
+      ></RootStack.Screen> */}
       <RootStack.Screen
         name="Root"
         options={{ headerShown: false, headerTitle: "" }}
@@ -120,6 +121,12 @@ const RootStackNavigator = () => {
         name="PropertyListings"
         options={{ headerShown: true, headerTitle: "" }}
         component={PropertyDetailScreen}
+      ></RootStack.Screen>
+
+      <RootStack.Screen
+        name="Contact_now"
+        options={{ headerShown: true, headerTitle: "" }}
+        component={ContactQueryForm}
       ></RootStack.Screen>
     </RootStack.Navigator>
   );

@@ -1,7 +1,15 @@
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import { Foundation, Entypo } from "react-native-vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import CustomText from "./Text";
 
 const LocationHeader = () => {
   const navigation = useNavigation();
@@ -9,19 +17,25 @@ const LocationHeader = () => {
     <SafeAreaView>
       <View style={styles.container}>
         <View>
-          <Text style={{ marginLeft: 10, fontWeight: 100 }}>
+          <CustomText style={{ marginLeft: 10, fontWeight: 100 }}>
             Your Current Location
-          </Text>
-          <View style={{ flexDirection: "row", marginTop: 10 }}>
-            <Foundation
-              name="marker"
-              color="#917AFD"
-              size={26}
-              style={{ marginLeft: 10 }}
+          </CustomText>
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../../assets/location_icon.png")}
+              style={{ marginLeft: 10, width: 20, height: 20 }}
             />
-            <Text style={{ fontSize: 20, marginLeft: 8, fontWeight: "bold" }}>
+            <CustomText
+              style={{ fontSize: 18, marginLeft: 5, fontWeight: "bold" }}
+            >
               New Jersey, USA
-            </Text>
+            </CustomText>
             <Entypo
               name="chevron-down"
               color="black"

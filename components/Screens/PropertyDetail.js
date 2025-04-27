@@ -9,6 +9,7 @@ import {
   Linking,
   FlatList,
   Platform,
+  Pressable,
 } from "react-native";
 import {
   Ionicons,
@@ -20,6 +21,8 @@ import {
 import { useNavigation, useRoute } from "@react-navigation/native";
 import property_details from "../../utils/properties_detail.json";
 import { Avatar } from "react-native-paper";
+import MapView, { Marker } from "react-native-maps";
+import CustomText from "../common/Text";
 
 export default function PropertyDetailScreen() {
   const route = useRoute();
@@ -43,9 +46,16 @@ export default function PropertyDetailScreen() {
     setData(property_details);
   }, []);
 
+  const region = {
+    latitude: 37.7749, // Example: San Francisco
+    longitude: -122.4194,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01,
+  };
+
   return (
     <>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <View style={styles.container} showsVerticalScrollIndicator={false}>
         <View
           style={{
             position: "absolute",
@@ -58,6 +68,22 @@ export default function PropertyDetailScreen() {
             width: "90%",
           }}
         >
+          <Pressable
+            onPress={() => navigation.goBack()}
+            style={{
+              backgroundColor: "white",
+              borderRadius: 100,
+              alignItems: "center",
+              justifyContent: "center",
+              width: 50,
+              height: 50,
+            }}
+          >
+            <Image
+              style={{ width: 25, height: 25 }}
+              source={require("../../assets/navigation/back.png")}
+            />
+          </Pressable>
           <View
             style={{
               backgroundColor: "white",
@@ -68,36 +94,12 @@ export default function PropertyDetailScreen() {
               height: 50,
             }}
           >
-            <EvilIcons
-              name="arrow-left"
-              onPress={() => navigation.goBack()}
-              size={33}
+            <Image
+              style={{ width: 25, height: 25 }}
+              source={require("../../assets/navigation/share.png")}
             />
           </View>
-          <View
-            style={{
-              backgroundColor: "white",
-              borderRadius: 100,
-              alignItems: "center",
-              justifyContent: "center",
-              width: 50,
-              height: 50,
-            }}
-          >
-            <EvilIcons name="arrow-left" size={33} />
-          </View>
         </View>
-        <Image
-          source={{
-            uri: Image.resolveAssetSource(
-              require(`../../assets/images/property_image/brichwood.jpeg`)
-            ).uri,
-          }}
-          style={styles.image}
-        />
-        <TouchableOpacity style={styles.videoButton}>
-          <Text style={styles.videoButtonText}>Watch Intro video</Text>
-        </TouchableOpacity>
 
         {data
           .filter(
@@ -111,399 +113,468 @@ export default function PropertyDetailScreen() {
             var accessibility = item.property.accessibility;
 
             return (
-              <View style={styles.content}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <View>
-                    <Text style={styles.title}>{item.property.name} </Text>
-                  </View>
-                  <View>
-                    <EvilIcons name="heart" size={24} />
-                  </View>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    flex: 1,
-                    marginHorizontal: 20,
-                  }}
-                >
-                  <View>
-                    <View style={{ flexDirection: "row", margin: 10 }}>
-                      <Text style={{ color: "#7D7F88" }}>
-                        {" "}
-                        ⭐ 4.1 (66 reviews)
-                      </Text>
-                    </View>
-                    <View style={{ flexDirection: "row", margin: 10 }}>
-                      <Ionicons name="bed-outline" size={20} color="#7D7F88" />
-                      <Text style={{ color: "#7D7F88" }}>
-                        {unit.bedrooms} room{" "}
-                      </Text>
-                    </View>
-                  </View>
-                  <View>
-                    <View style={{ flexDirection: "row", margin: 10 }}>
-                      <EvilIcons name="location" size={20} color="#7D7F88" />
-                      {/* <Text numberOfLines={2}>{item.property.address}</Text> */}
-                      <Text numberOfLines={2} style={{ color: "#7D7F88" }}>
-                        {/* "dfsf" */}
-                      </Text>
-                    </View>
-                    <View style={{ flexDirection: "row", margin: 10 }}>
-                      <MaterialIcons
-                        name="house-siding"
-                        size={20}
-                        color="#7D7F88"
-                      />
-                      <Text style={{ color: "#7D7F88" }}>
-                        {unit.sizeSqFt} sqft
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View
-                  style={{
-                    backgroundColor: "#D6D6D6",
-                    width: "100%",
-                    height: 1,
-                    marginBottom: 20,
-                    marginTop: 20,
-                  }}
-                />
-
-                <View style={styles.ownerInfo}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Image
-                      source={require("../../assets/avatars/female.png")}
-                      style={styles.ownerAvatar}
-                    />
-                    <View>
-                      <Text style={styles.ownerName}>
-                        {item.property.contact.name}
-                      </Text>
-                      <Text style={styles.ownerRole}>
-                        {item.property.contact.role}
-                      </Text>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      alignItems: "center",
-                      shadowColor: "#eeeff0",
-                      shadowRadius: 5,
-                      elevation: 10,
-                      padding: 10,
-                      shadowOpacity: 1,
-                      backgroundColor: "white",
-                      borderRadius: 10,
-                      shadowOffset: {
-                        x: 10,
-                        y: 5,
-                      },
-                    }}
+              <>
+                <ScrollView>
+                  <Image source={{ uri: image }} style={styles.image} />
+                  <TouchableOpacity
+                    style={styles.videoButton}
+                    onPress={() =>
+                      navigation.navigate("Contact_now", {
+                        title: item.property.name,
+                        address: item.property.address,
+                      })
+                    }
                   >
-                    <Feather name="phone-call" size={20} color="#7D7F88" />
-                  </View>
-                </View>
-
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>Home facilities</Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      margin: 10,
-                    }}
-                  >
-                    <MaterialIcons
-                      name="severe-cold"
-                      size={25}
-                      color="#7D7F88"
-                      style={{ marginRight: 10 }}
-                    />
-                    <Text
+                    <CustomText style={styles.videoButtonText}>
+                      Contact Now
+                    </CustomText>
+                  </TouchableOpacity>
+                  <View style={styles.content}>
+                    <View
                       style={{
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        color: "#7D7F88",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
                       }}
                     >
-                      {" "}
-                      Air conditioner - {utilities?.airConditioner}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      margin: 10,
-                    }}
-                  >
-                    <FontAwesome6
-                      name="kitchen-set"
-                      size={21}
-                      color="#7D7F88"
-                      style={{ marginRight: 10 }}
-                    />
-                    <Text
+                      <View>
+                        <CustomText style={styles.title}>
+                          {item.property.name}{" "}
+                        </CustomText>
+                      </View>
+                      <View>
+                        <EvilIcons name="heart" size={24} />
+                      </View>
+                    </View>
+                    <View
                       style={{
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        color: "#7D7F88",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        flex: 1,
+                        marginHorizontal: 20,
                       }}
                     >
-                      {" "}
-                      Kicthen -{" "}
-                      {accessibility?.kitchen.type
-                        ? accessibility.kitchen.type
-                        : accessibility.kitchen}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      margin: 10,
-                    }}
-                  >
-                    <FontAwesome6
-                      name="car"
-                      size={20}
-                      style={{ marginRight: 10 }}
-                      color="#7D7F88"
-                    />
-                    <Text
+                      <View>
+                        <View style={{ flexDirection: "row", margin: 10 }}>
+                          <CustomText style={{ color: "#7D7F88" }}>
+                            {" "}
+                            ⭐ 4.1 (66 reviews)
+                          </CustomText>
+                        </View>
+                        <View style={{ flexDirection: "row", margin: 10 }}>
+                          <Ionicons
+                            name="bed-outline"
+                            size={20}
+                            color="#7D7F88"
+                          />
+                          <CustomText style={{ color: "#7D7F88" }}>
+                            {unit.bedrooms} room{" "}
+                          </CustomText>
+                        </View>
+                      </View>
+                      <View>
+                        <View style={{ flexDirection: "row", margin: 10 }}>
+                          <EvilIcons
+                            name="location"
+                            size={20}
+                            color="#7D7F88"
+                          />
+                          <CustomText numberOfLines={3}>
+                            {item.property.address.split(" ")[0] +
+                              item.property.address.split(" ")[1] +
+                              "\n" +
+                              item.property.address
+                                .split(" ")
+                                .slice(2)
+                                .join(" ")}
+                          </CustomText>
+                        </View>
+                        <View style={{ flexDirection: "row", margin: 10 }}>
+                          <MaterialIcons
+                            name="house-siding"
+                            size={20}
+                            color="#7D7F88"
+                          />
+                          <CustomText style={{ color: "#7D7F88" }}>
+                            {unit.sizeSqFt} sqft
+                          </CustomText>
+                        </View>
+                      </View>
+                    </View>
+
+                    <View
                       style={{
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        color: "#7D7F88",
+                        backgroundColor: "#D6D6D6",
+                        width: "100%",
+                        height: 1,
+                        marginBottom: 20,
+                        marginTop: 20,
                       }}
-                    >
-                      {" "}
-                      Parking -{" "}
-                      {parking?.allottedParkingSpaces
-                        ? parking?.allottedParkingSpaces
-                        : "No Parking Space"}
-                    </Text>
-                  </View>
-                  {/* <Text style={styles.facility}>
+                    />
+
+                    <View style={styles.ownerInfo}>
+                      <View style={{ flexDirection: "row" }}>
+                        <Image
+                          source={require("../../assets/avatars/female.png")}
+                          style={styles.ownerAvatar}
+                        />
+                        <View>
+                          <CustomText style={styles.ownerName}>
+                            {item.property.contact.name}
+                          </CustomText>
+                          <CustomText style={styles.ownerRole}>
+                            {item.property.contact.role}
+                          </CustomText>
+                        </View>
+                      </View>
+                      <View
+                        style={{
+                          alignItems: "center",
+                          shadowColor: "#eeeff0",
+                          shadowRadius: 5,
+                          elevation: 10,
+                          padding: 10,
+                          shadowOpacity: 1,
+                          backgroundColor: "white",
+                          borderRadius: 10,
+                          shadowOffset: {
+                            x: 10,
+                            y: 5,
+                          },
+                        }}
+                      >
+                        <Feather name="phone-call" size={20} color="#7D7F88" />
+                      </View>
+                    </View>
+
+                    <View style={styles.section}>
+                      <CustomText style={styles.sectionTitle}>
+                        Home facilities
+                      </CustomText>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          margin: 10,
+                        }}
+                      >
+                        <MaterialIcons
+                          name="severe-cold"
+                          size={25}
+                          color="#7D7F88"
+                          style={{ marginRight: 10 }}
+                        />
+                        <CustomText
+                          style={{
+                            fontSize: 15,
+                            fontWeight: "bold",
+                            color: "#7D7F88",
+                          }}
+                        >
+                          {" "}
+                          Air conditioner - {utilities?.airConditioner}
+                        </CustomText>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          margin: 10,
+                        }}
+                      >
+                        <FontAwesome6
+                          name="kitchen-set"
+                          size={21}
+                          color="#7D7F88"
+                          style={{ marginRight: 10 }}
+                        />
+                        <CustomText
+                          style={{
+                            fontSize: 15,
+                            fontWeight: "bold",
+                            color: "#7D7F88",
+                          }}
+                        >
+                          {" "}
+                          Kicthen -{" "}
+                          {accessibility?.kitchen.type
+                            ? accessibility.kitchen.type
+                            : accessibility.kitchen}
+                        </CustomText>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          margin: 10,
+                        }}
+                      >
+                        <FontAwesome6
+                          name="car"
+                          size={20}
+                          style={{ marginRight: 10 }}
+                          color="#7D7F88"
+                        />
+                        <CustomText
+                          style={{
+                            fontSize: 15,
+                            fontWeight: "bold",
+                            color: "#7D7F88",
+                          }}
+                        >
+                          {" "}
+                          Parking -{" "}
+                          {parking?.allottedParkingSpaces
+                            ? parking?.allottedParkingSpaces
+                            : "No Parking Space"}
+                        </CustomText>
+                      </View>
+                      {/* <CustomText style={styles.facility}>
                     🌬 Air conditioner {utilities?.airConditioner}
-                  </Text>
-                  <Text style={styles.facility}>
+                  </CustomText>
+                  <CustomText style={styles.facility}>
                     🍽 Heating{utilities?.heating}
-                  </Text>
-                  <Text style={styles.facility}>
+                  </CustomText>
+                  <CustomText style={styles.facility}>
                     🚗 Free parking {parking?.allottedParkingSpaces}
-                  </Text> */}
-                </View>
+                  </CustomText> */}
+                    </View>
 
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>
-                    Nearest public facilities
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-around",
-                      aligItems: "center",
-                    }}
+                    <View style={styles.section}>
+                      <CustomText style={styles.sectionTitle}>
+                        Nearest public facilities
+                      </CustomText>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-around",
+                          aligItems: "center",
+                        }}
+                      >
+                        <View>
+                          <View
+                            style={{
+                              backgroundColor: "white",
+                              margin: 10,
+                              borderRadius: 10,
+                            }}
+                          >
+                            <View style={{ flexDirection: "row" }}>
+                              <Feather
+                                name="shopping-cart"
+                                size={20}
+                                color="#7D7F88"
+                              />
+                              <CustomText
+                                style={{
+                                  fontSize: 15,
+                                  fontWeight: "bold",
+                                  marginLeft: 10,
+                                  color: "#7D7F88",
+                                }}
+                              >
+                                Minimarket{" "}
+                              </CustomText>
+                            </View>
+                            <CustomText style={styles.facility}>
+                              {nearbyServices?.groceryShopping}
+                            </CustomText>
+                          </View>
+                          <View
+                            style={{
+                              backgroundColor: "white",
+                              margin: 10,
+                              borderRadius: 10,
+                            }}
+                          >
+                            <View style={{ flexDirection: "row" }}>
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  marginRight: 10,
+                                }}
+                              >
+                                <FontAwesome6
+                                  name="hospital"
+                                  size={20}
+                                  color="#7D7F88"
+                                />
+                              </View>
+                              <CustomText
+                                style={{
+                                  fontSize: 15,
+                                  fontWeight: "bold",
+                                  color: "#7D7F88",
+                                }}
+                              >
+                                Hospital
+                              </CustomText>
+                            </View>
+                            <CustomText style={styles.facility}>
+                              {nearbyServices?.hospital}
+                            </CustomText>
+                          </View>
+                        </View>
+                        <View>
+                          <View
+                            style={{
+                              backgroundColor: "white",
+                              margin: 10,
+                              borderRadius: 10,
+                            }}
+                          >
+                            <View style={{ flexDirection: "row" }}>
+                              <Feather
+                                name="shopping-cart"
+                                size={20}
+                                color="#7D7F88"
+                              />
+                              <CustomText
+                                style={{
+                                  fontSize: 15,
+                                  fontWeight: "bold",
+                                  marginLeft: 10,
+                                  color: "#7D7F88",
+                                }}
+                              >
+                                Bus Stop{" "}
+                              </CustomText>
+                            </View>
+                            <CustomText style={styles.facility}>
+                              {nearbyServices?.busStop}
+                            </CustomText>
+                          </View>
+                          <View
+                            style={{
+                              backgroundColor: "white",
+                              margin: 10,
+                              borderRadius: 10,
+                            }}
+                          >
+                            <View style={{ flexDirection: "row" }}>
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  marginRight: 10,
+                                }}
+                              >
+                                <FontAwesome6
+                                  name="hospital"
+                                  size={20}
+                                  color="#7D7F88"
+                                />
+                              </View>
+                              <CustomText
+                                style={{
+                                  fontSize: 15,
+                                  fontWeight: "bold",
+                                  color: "#7D7F88",
+                                }}
+                              >
+                                Bus Stop
+                              </CustomText>
+                            </View>
+                            <CustomText style={styles.facility}>
+                              {nearbyServices?.busStop}
+                            </CustomText>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+
+                    <View style={styles.section}>
+                      <CustomText style={styles.sectionTitle}>
+                        Property Comments
+                      </CustomText>
+                      <CustomText style={styles.paragraph}>
+                        {item.property.propertyComments}
+                      </CustomText>
+
+                      <CustomText style={styles.paragraph}>
+                        This apartment equipped with Washing Machine,
+                      </CustomText>
+                      <CustomText style={styles.paragraph}>
+                        Electric,Stove, Microwave, Refrigerator, Cutlery.
+                      </CustomText>
+                    </View>
+                    <View style={styles.section}>
+                      <CustomText style={styles.sectionTitle}>
+                        Location
+                      </CustomText>
+                      <MapView style={styles.map} initialRegion={region} />
+                    </View>
+
+                    {/* <TouchableOpacity style={styles.advanceButton}>
+                      <CustomText style={styles.advanceText}>
+                        Advance Payment
+                      </CustomText>
+                      <CustomText style={styles.advanceAmount}>
+                        500$/month
+                      </CustomText>
+                    </TouchableOpacity> */}
+
+                    <View style={styles.section}>
+                      <CustomText style={styles.sectionTitle}>
+                        Testimonials
+                      </CustomText>
+                      <View style={styles.testimonial}>
+                        <Avatar.Image
+                          size={44}
+                          source={require("../../assets/avatars/male.png")}
+                        />
+                        <CustomText style={styles.testimonialName}>
+                          Biggy Shahi ⭐⭐⭐⭐⭐
+                        </CustomText>
+                        <CustomText style={styles.paragraph}>
+                          My wife and I had a dream of downsizing from our house
+                          in Cape Elizabeth into a small condo closer to where
+                          we work and play in Portland...
+                        </CustomText>
+                      </View>
+                      <View style={styles.testimonial}>
+                        <Avatar.Image
+                          size={44}
+                          source={require("../../assets/avatars/male.png")}
+                        />
+                        <CustomText style={styles.testimonialName}>
+                          C. J. Upohrel ⭐⭐⭐⭐⭐
+                        </CustomText>
+                        <CustomText style={styles.paragraph}>
+                          My wife & I have moved 6 times in the last 25 years.
+                          Obviously, we’ve dealt with many realtors both on the
+                          buying and selling side...
+                        </CustomText>
+                      </View>
+                    </View>
+                  </View>
+                </ScrollView>
+                <View style={styles.footerFixed}>
+                  <View>
+                    <CustomText style={styles.footerPrice}>
+                      ${item.property.rent} / month
+                    </CustomText>
+                    <CustomText style={styles.footerEstimation}>
+                      Payment estimation
+                    </CustomText>
+                  </View>
+                  <TouchableOpacity
+                    style={styles.contactButton}
+                    onPress={() =>
+                      navigation.navigate("Contact_now", {
+                        title: item.property.name,
+                        address: item.property.address,
+                      })
+                    }
                   >
-                    <View>
-                      <View
-                        style={{
-                          backgroundColor: "white",
-                          margin: 10,
-                          borderRadius: 10,
-                        }}
-                      >
-                        <View style={{ flexDirection: "row" }}>
-                          <Feather
-                            name="shopping-cart"
-                            size={20}
-                            color="#7D7F88"
-                          />
-                          <Text
-                            style={{
-                              fontSize: 15,
-                              fontWeight: "bold",
-                              marginLeft: 10,
-                              color: "#7D7F88",
-                            }}
-                          >
-                            Minimarket{" "}
-                          </Text>
-                        </View>
-                        <Text style={styles.facility}>
-                          {nearbyServices?.groceryShopping}
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          backgroundColor: "white",
-                          margin: 10,
-                          borderRadius: 10,
-                        }}
-                      >
-                        <View style={{ flexDirection: "row" }}>
-                          <View
-                            style={{ flexDirection: "row", marginRight: 10 }}
-                          >
-                            <FontAwesome6
-                              name="hospital"
-                              size={20}
-                              color="#7D7F88"
-                            />
-                          </View>
-                          <Text
-                            style={{
-                              fontSize: 15,
-                              fontWeight: "bold",
-                              color: "#7D7F88",
-                            }}
-                          >
-                            Hospital
-                          </Text>
-                        </View>
-                        <Text style={styles.facility}>
-                          {nearbyServices?.hospital}
-                        </Text>
-                      </View>
-                    </View>
-                    <View>
-                      <View
-                        style={{
-                          backgroundColor: "white",
-                          margin: 10,
-                          borderRadius: 10,
-                        }}
-                      >
-                        <View style={{ flexDirection: "row" }}>
-                          <Feather
-                            name="shopping-cart"
-                            size={20}
-                            color="#7D7F88"
-                          />
-                          <Text
-                            style={{
-                              fontSize: 15,
-                              fontWeight: "bold",
-                              marginLeft: 10,
-                              color: "#7D7F88",
-                            }}
-                          >
-                            Bus Stop{" "}
-                          </Text>
-                        </View>
-                        <Text style={styles.facility}>
-                          {nearbyServices?.busStop}
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          backgroundColor: "white",
-                          margin: 10,
-                          borderRadius: 10,
-                        }}
-                      >
-                        <View style={{ flexDirection: "row" }}>
-                          <View
-                            style={{ flexDirection: "row", marginRight: 10 }}
-                          >
-                            <FontAwesome6
-                              name="hospital"
-                              size={20}
-                              color="#7D7F88"
-                            />
-                          </View>
-                          <Text
-                            style={{
-                              fontSize: 15,
-                              fontWeight: "bold",
-                              color: "#7D7F88",
-                            }}
-                          >
-                            Bus Stop
-                          </Text>
-                        </View>
-                        <Text style={styles.facility}>
-                          {nearbyServices?.busStop}
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
+                    <CustomText style={styles.contactText}>Contact</CustomText>
+                  </TouchableOpacity>
                 </View>
-
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>Property Comments</Text>
-                  <Text style={styles.paragraph}>
-                    {item.property.propertyComments}
-                  </Text>
-
-                  <Text style={styles.paragraph}>
-                    This apartment equipped with Washing Machine, Electric
-                    Stove, Microwave, Refrigerator, Cutlery.
-                  </Text>
-                </View>
-
-                <TouchableOpacity style={styles.advanceButton}>
-                  <Text style={styles.advanceText}>Advance Payment</Text>
-                  <Text style={styles.advanceAmount}>500$/month</Text>
-                </TouchableOpacity>
-
-                <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>Testimonials</Text>
-                  <View style={styles.testimonial}>
-                    <Avatar.Image
-                      size={44}
-                      source={require("../../assets/avatars/male.png")}
-                    />
-                    <Text style={styles.testimonialName}>
-                      Biggy Shahi ⭐⭐⭐⭐⭐
-                    </Text>
-                    <Text style={styles.paragraph}>
-                      My wife and I had a dream of downsizing from our house in
-                      Cape Elizabeth into a small condo closer to where we work
-                      and play in Portland...
-                    </Text>
-                  </View>
-                  <View style={styles.testimonial}>
-                    <Avatar.Image
-                      size={44}
-                      source={require("../../assets/avatars/male.png")}
-                    />
-                    <Text style={styles.testimonialName}>
-                      C. J. Upohrel ⭐⭐⭐⭐⭐
-                    </Text>
-                    <Text style={styles.paragraph}>
-                      My wife & I have moved 6 times in the last 25 years.
-                      Obviously, we’ve dealt with many realtors both on the
-                      buying and selling side...
-                    </Text>
-                  </View>
-                </View>
-              </View>
+              </>
             );
           })}
-      </ScrollView>
-      {/* Footer fixed at the bottom */}
-      <View style={styles.footerFixed}>
-        <View>
-          <Text style={styles.footerPrice}>$526 / month</Text>
-          <Text style={styles.footerEstimation}>Payment estimation</Text>
-        </View>
-        <TouchableOpacity style={styles.contactButton}>
-          <Text style={styles.contactText}>Contact</Text>
-        </TouchableOpacity>
       </View>
+      {/* Footer fixed at the bottom */}
     </>
   );
 }
@@ -598,5 +669,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  map: {
+    width: "100%",
+    height: 200,
+    borderRadius: 10,
+    marginTop: 10,
   },
 });

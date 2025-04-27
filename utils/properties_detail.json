@@ -3,6 +3,8 @@
     "property": {
       "name": "Clifton Main Mews",
       "address": "988 and 1010 Main Avenue, Clifton, NJ 07011",
+      "image": "https://api.mylavya.com/resources/placeholder.jpeg" ,
+
       "rent": 216,
       "deposit": 216,
       "availability": "Waiting List",
@@ -98,6 +100,8 @@
   {
     "property": {
       "name": "Clifton Main Mews",
+      "image": "https://api.mylavya.com/resources/placeholder.jpeg" ,
+
       "address": "988 and 1010 Main Avenue, Clifton, NJ 07011",
       "rent": 869,
       "deposit": 869,
@@ -195,6 +199,8 @@
   {
     "property": {
       "name": "Clifton Main Mews",
+      "image": "https://api.mylavya.com/resources/placeholder.jpeg" ,
+
       "address": "988 Main Ave, Clifton, NJ 07011",
       "rent": 877,
       "deposit": 877,
@@ -301,6 +307,8 @@
   {
     "property": {
       "name": "Horizons at Scales Plaza",
+      "image": "https://api.mylavya.com/resources/horizon.jpeg" ,
+
       "address": "100 & 101 Scales Plaza, Clifton, NJ 07013",
       "rent": 948,
       "deposit": 948,
@@ -428,6 +436,8 @@
   {
     "property": {
       "name": "Senior Horizon at Clifton",
+      "image": "https://api.mylavya.com/resources/placeholder.jpeg" ,
+
       "address": "714 Clifton Ave, Clifton, NJ 07013",
       "rent": 1000,
       "deposit": 1000,
@@ -524,6 +534,8 @@
   {
     "property": {
       "name": "Clifton Main Mews",
+      "image": "https://api.mylavya.com/resources/placeholder.jpeg" ,
+
       "address": "988 and 1010 Main Avenue, Clifton, NJ 07011",
       "rent": 1029,
       "deposit": 1029,
@@ -620,6 +632,8 @@
   {
     "property": {
       "name": "Clifton Main Mews",
+      "image": "https://api.mylavya.com/resources/placeholder.jpeg" ,
+
       "address": "988 Main Ave, Clifton, NJ 07011",
       "status": "Income Restricted",
       "rent": 1040,
@@ -736,6 +750,7 @@
   {
     "property": {
       "name": "Horizons at Scales Plaza",
+      "image" :"https://api.mylavya.com/resources/horizon.jpeg",
       "address": "100 & 101 Scales Plaza, Clifton, NJ 07013",
       "income_restricted": true,
       "income_based_rent": {
@@ -856,6 +871,8 @@
   {
     "property": {
       "name": "Mill on Main",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "1000 Main Ave, Clifton, NJ 07011",
       "status": "Waiting List",
       "incomeRestricted": true,
@@ -958,6 +975,8 @@
   {
     "property": {
       "name": "Mill on Main",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "1000 Main Ave, Clifton, NJ 07011",
       "status": "Waiting List",
       "incomeRestricted": true,
@@ -1061,6 +1080,8 @@
   {
     "property": {
       "name": "Clifton Main Mews",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "988 Main Ave, Clifton, NJ 07011",
       "rent": 1176,
       "deposit": 1176,
@@ -1155,6 +1176,8 @@
   {
     "property": {
       "name": "Clifton Main Mews",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "988 Main Ave, Clifton, NJ 07011",
       "income_restricted": true,
       "rent": 1188,
@@ -1256,6 +1279,8 @@
   {
     "property": {
       "name": "Richfield Village Apartments",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "168 Richfield Terrace, Clifton, NJ 07012",
       "section_8_welcome": false,
       "income_restricted": false,
@@ -1343,6 +1368,8 @@
   {
     "property": {
       "name": "Mill on Main",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "1000 Main Ave, Clifton, NJ 07011",
       "section_8_welcome": true,
       "income_restricted": true,
@@ -1427,6 +1454,8 @@
   {
     "property": {
       "name": "Richfield Village Apartments",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "168 Richfield Terrace, Clifton, NJ 07012",
       "section_8_welcome": false,
       "income_restricted": false,
@@ -1516,6 +1545,8 @@
   {
     "property": {
       "name": "Mill on Main",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "1000 Main Ave, Clifton, NJ 07011",
       "section_8_welcome": true,
       "income_restricted": false,
@@ -1600,6 +1631,8 @@
   {
     "property": {
       "name": "Richfield Village Apartments",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "168 Richfield Terrace, Clifton, NJ 07012",
       "section_8_welcome": false,
       "income_restricted": false,
@@ -1688,6 +1721,8 @@
   {
     "property": {
       "name": "Spruce Senior Housing",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "2 Spruce Street, Dover, NJ 07801",
       "status": "Waiting List",
       "incomeRestricted": true,
@@ -1807,6 +1842,7 @@
   {
     "property": {
       "name": "One Thompson Avenue",
+      "image":"https://api.mylavya.com/resources/one-thompson.jpeg",
       "address": "1 Thompson Avenue, Dover, NJ 07801",
       "status": "Waiting List",
       "incomeRestricted": true,
@@ -1901,6 +1937,7 @@
   {
     "property": {
       "name": "One Thompson Avenue",
+      "image":"https://api.mylavya.com/resources/one-thompson.jpeg",
       "address": "1 Thompson Avenue, Dover, NJ 07801",
       "status": "Waiting List",
       "incomeRestricted": true,
@@ -1994,6 +2031,7 @@
   {
     "property": {
       "name": "One Thompson Avenue",
+      "image":"https://api.mylavya.com/resources/one-thompson.jpeg",
       "address": "1 Thompson Avenue, Dover, NJ 07801",
       "status": "Waiting List",
       "incomeRestricted": true,
@@ -2088,6 +2126,8 @@
   {
     "property": {
       "name": "Woodmont Forge Hopewell",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "87 Federal City Road, Hopewell Township, NJ 08534",
       "income_restricted": true,
       "income_based_rent_range": {
@@ -2181,6 +2221,8 @@
   {
     "property": {
       "name": "Woodmont Forge at Hopewell",
+      "image" :"https://api.mylavya.com/resources/placeholder.jpeg",
+
       "address": "87 Federal City Road, Hopewell Township, NJ 08534",
       "income_restricted": true,
       "income_based_rent_range": {
@@ -2274,6 +2316,8 @@
   {
     "property": {
       "name": "61 Stiles Avenue, Unit 3",
+      "image" :"https://api.mylavya.com/resources/stilles.jpeg",
+
       "address": "61 Stiles Avenue, Unit 3, Haddonfield, NJ 08033",
       "rent": 519,
       "deposit": 519,
@@ -2376,6 +2420,8 @@
   {
     "property": {
       "name": "Birchwood at Tarditi Commons.",
+      "image":"https://api.mylavya.com/resources/brichwood.jpeg",
+
       "address": "325 Lincoln Ave, Haddonfield, NJ 08033",
       "price": {
         "fair_market_rate": 992,
@@ -2478,7 +2524,7 @@
     "property": {
       "name": "61 Stiles Avenue, Unit 2",
       "address": "61 Stiles Avenue, Unit 2, Haddonfield, NJ, 08033",
-
+      "image":"https://api.mylavya.com/resources/stilles.jpeg", 
       "rent": 1035,
       "deposit": 1035,
       "available_date": "2025-04-01",
@@ -2579,6 +2625,7 @@
     "property": {
       "name": "129 Fowler Street, Unit 3",
       "address": "129 Fowler Street, Unit 3, Haddonfield, NJ 08033",
+      "image" : "https://api.mylavya.com/resources/fower-street-unit-three.jpeg",
       "rent": 1284,
       "deposit": 1284,
       "available_from": "03/01/25",
@@ -2671,6 +2718,7 @@
   {
     "property": {
       "name": "The Place at Haddonfield",
+      "image" :"https://api.mylavya.com/resources/elizabeth.jpeg",
       "address": "1105-2205 Elizabeth Place - 20 Snowden Avenue - Haddonfield, NJ 08033",
       "status": "COMING SOON",
       "deposit_range": {
@@ -2796,6 +2844,7 @@
   {
     "property": {
       "name": "The Place at Haddonfield",
+      "image" :"https://api.mylavya.com/resources/elizabeth.jpeg",
       "address": "1105-2205 Elizabeth Place - 20 Snowden Avenue - Haddonfield, NJ 08033",
       "status": "COMING SOON",
       "rent": "N/A",
@@ -2912,6 +2961,7 @@
   {
     "property": {
       "name": "SENIOR HORIZON AT CLIFTON",
+      "image": "https://api.mylavya.com/resources/placeholder.jpeg" ,
       "address": "714 Clifton Ave, Clifton, NJ 07013",
       "section_8_welcome": false,
       "income_restricted": false,
@@ -3030,3 +3080,4 @@
     }
   }
 ]
+

@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  Image,
+  Pressable,
+} from "react-native";
 import React from "react";
 import PropertyCard from "../cards/ProppertCard";
 import states from "../../utils/County.json";
@@ -24,7 +32,8 @@ const RenderList = ({ item }) => {
   );
 };
 
-const Propertlistings = () => {
+const Propertlistings = ({ closeBottomSheet }) => {
+  const navigation = useNavigation();
   return (
     <View style={{ backgroundColor: "white", alignItems: "center" }}>
       <View
@@ -37,6 +46,17 @@ const Propertlistings = () => {
           margin: 20,
         }}
       >
+        <Pressable
+          onPress={() => {
+            navigation.goBack();
+            closeBottomSheet();
+          }}
+        >
+          <Image
+            style={{ width: 30, height: 30 }}
+            source={require("../../assets/navigation/back.png")}
+          />
+        </Pressable>
         <Text style={{ fontWeight: "bold", color: "#1A1E25", fontSize: 19 }}>
           Showing {states.length} Results
         </Text>
