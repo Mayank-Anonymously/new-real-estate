@@ -10,6 +10,7 @@ import {
 import { Ionicons } from "@expo/vector-icons"; // You can use this with Expo
 import { useNavigation } from "@react-navigation/native";
 import user from "../../../utils/user.json";
+import { loginApi } from "../../../utils/apicalls/loginApi";
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,13 +18,9 @@ export default function LoginScreen() {
   const navigation = useNavigation();
   const [error, setErros] = useState("");
   const handleLogin = () => {
-    if (user.email !== email) {
-      setErros("Email you have entered is incorrect");
-    } else if (user.password !== password) {
-      setErros("Password you have entered is incorrect");
-    } else if (user.email === email && user.password === password) {
-      navigation.navigate("Root");
-    }
+  
+      loginApi(email , password ,navigation , setErros)
+    
   };
 
   return (

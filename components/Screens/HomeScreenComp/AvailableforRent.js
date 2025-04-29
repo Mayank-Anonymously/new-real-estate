@@ -1,14 +1,20 @@
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropertyCard from "../../cards/ProppertCard";
 import { ScrollView } from "react-native";
 import { Button, Paragraph } from "react-native-paper";
 import InternationalMigrations from "../../cards/DestinationCards";
 import { useNavigation } from "@react-navigation/native";
 import states from "../../../utils/County.json";
+import { fetchallcounty } from "../../../utils/apicalls/fetchallcounty";
 const height = Dimensions.get("window").height;
 const AvailableforRent = () => {
-  const navigation = useNavigation();
+    const navigation = useNavigation();
+  const [ data  , setData] = useState([])
+  useEffect(() =>  {
+    fetchallcounty(setData)
+  } ,  [])
+
   return (
     <ScrollView>
       <View style={{ backgroundColor: "white", marginBottom: 60 }}>
@@ -35,9 +41,11 @@ const AvailableforRent = () => {
         </View>
         <View>
           <ScrollView horizontal={true}>
-            {states
+            {data
               .filter((ite) => ite.address.includes("Dover"))
               .map((item, index) => {
+                console.log(item.price)
+                item.price= item.price ===  undefined ?  "N/A" : item.price
                 return (
                   <PropertyCard
                     onPress={() =>
@@ -75,7 +83,7 @@ const AvailableforRent = () => {
             </Button>
           </View>
           <ScrollView horizontal={true}>
-            {states
+            {data
               .filter((ite) => ite.address.includes("Clifton"))
               .map((item, index) => {
                 return (

@@ -7,11 +7,12 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropertyCard from "../cards/ProppertCard";
 import states from "../../utils/County.json";
 import { Ionicons } from "react-native-vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { fetchallcounty } from "../../utils/apicalls/fetchallcounty";
 const RenderList = ({ item }) => {
   const navigation = useNavigation();
 
@@ -34,6 +35,11 @@ const RenderList = ({ item }) => {
 
 const Propertlistings = ({ closeBottomSheet }) => {
   const navigation = useNavigation();
+    const [ data  , setData] = useState([])
+    useEffect(() =>  {
+      fetchallcounty(setData)
+    } ,  [])
+  
   return (
     <View style={{ backgroundColor: "white", alignItems: "center" }}>
       <View
@@ -58,14 +64,14 @@ const Propertlistings = ({ closeBottomSheet }) => {
           />
         </Pressable>
         <Text style={{ fontWeight: "bold", color: "#1A1E25", fontSize: 19 }}>
-          Showing {states.length} Results
+          Showing {data.length} Results
         </Text>
         <Text>
           <Ionicons name="filter-outline" size={23} color="black" />
         </Text>
       </View>
       <FlatList
-        data={states}
+        data={data}
         renderItem={({ item }) => <RenderList item={item} />}
         style={{ marginBottom: "35%" }}
       />

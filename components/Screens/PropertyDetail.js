@@ -23,6 +23,7 @@ import property_details from "../../utils/properties_detail.json";
 import { Avatar } from "react-native-paper";
 import MapView, { Marker } from "react-native-maps";
 import CustomText from "../common/Text";
+import { fetchpropdetails } from "../../utils/apicalls/fetchbytitle";
 
 export default function PropertyDetailScreen() {
   const route = useRoute();
@@ -31,6 +32,7 @@ export default function PropertyDetailScreen() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    fetchpropdetails(setData , title , rent)
     async function loadFonts() {
       await Font.loadAsync({
         "Hind-Jalandhar": require("../../assets/fonts/Hind/Hind-Regular.ttf"),
@@ -43,8 +45,8 @@ export default function PropertyDetailScreen() {
       setFontsLoaded(true);
     }
     loadFonts();
-    setData(property_details);
   }, []);
+
 
   const region = {
     latitude: 37.7749, // Example: San Francisco
@@ -52,7 +54,17 @@ export default function PropertyDetailScreen() {
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   };
+  var unit = data.unit;
+  var utilities = data.utilities;
+  var parking = data.parkingAndEntry;
+  var nearbyServices = data.nearbyServices;
+  var accessibility = data.accessibility;
 
+
+
+
+
+  if (data.length === undefined )
   return (
     <>
       <View style={styles.container} showsVerticalScrollIndicator={false}>
@@ -101,18 +113,9 @@ export default function PropertyDetailScreen() {
           </View>
         </View>
 
-        {data
-          .filter(
-            (iex) => iex.property.name === title && iex.property.rent === rent
-          )
-          .map((item, index) => {
-            var unit = item.property.unit;
-            var utilities = item.property.utilities;
-            var parking = item.property.parkingAndEntry;
-            var nearbyServices = item.property.nearbyServices;
-            var accessibility = item.property.accessibility;
+    
+            
 
-            return (
               <>
                 <ScrollView>
                   <Image source={{ uri: image }} style={styles.image} />
@@ -120,8 +123,8 @@ export default function PropertyDetailScreen() {
                     style={styles.videoButton}
                     onPress={() =>
                       navigation.navigate("Contact_now", {
-                        title: item.property.name,
-                        address: item.property.address,
+                        title: data.name,
+                        address: data.address,
                       })
                     }
                   >
@@ -139,7 +142,7 @@ export default function PropertyDetailScreen() {
                     >
                       <View>
                         <CustomText style={styles.title}>
-                          {item.property.name}{" "}
+                          {data.name}{" "}
                         </CustomText>
                       </View>
                       <View>
@@ -181,10 +184,10 @@ export default function PropertyDetailScreen() {
                             color="#7D7F88"
                           />
                           <CustomText numberOfLines={3}>
-                            {item.property.address.split(" ")[0] +
-                              item.property.address.split(" ")[1] +
+                            {data.address.split(" ")[0] +
+                              data.address.split(" ")[1] +
                               "\n" +
-                              item.property.address
+                              data.address
                                 .split(" ")
                                 .slice(2)
                                 .join(" ")}
@@ -221,10 +224,10 @@ export default function PropertyDetailScreen() {
                         />
                         <View>
                           <CustomText style={styles.ownerName}>
-                            {item.property.contact.name}
+                            {data.contact.name}
                           </CustomText>
                           <CustomText style={styles.ownerRole}>
-                            {item.property.contact.role}
+                            {data.contact.role}
                           </CustomText>
                         </View>
                       </View>
@@ -488,7 +491,7 @@ export default function PropertyDetailScreen() {
                         Property Comments
                       </CustomText>
                       <CustomText style={styles.paragraph}>
-                        {item.property.propertyComments}
+                        {data.propertyComments}
                       </CustomText>
 
                       <CustomText style={styles.paragraph}>
@@ -552,7 +555,7 @@ export default function PropertyDetailScreen() {
                 <View style={styles.footerFixed}>
                   <View>
                     <CustomText style={styles.footerPrice}>
-                      ${item.property.rent} / month
+                      ${data.rent} / month
                     </CustomText>
                     <CustomText style={styles.footerEstimation}>
                       Payment estimation
@@ -562,8 +565,8 @@ export default function PropertyDetailScreen() {
                     style={styles.contactButton}
                     onPress={() =>
                       navigation.navigate("Contact_now", {
-                        title: item.property.name,
-                        address: item.property.address,
+                        title: data.name,
+                        address: data.address,
                       })
                     }
                   >
@@ -571,8 +574,6 @@ export default function PropertyDetailScreen() {
                   </TouchableOpacity>
                 </View>
               </>
-            );
-          })}
       </View>
       {/* Footer fixed at the bottom */}
     </>
