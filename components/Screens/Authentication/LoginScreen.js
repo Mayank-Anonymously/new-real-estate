@@ -6,12 +6,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  Image,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // You can use this with Expo
 import { useNavigation } from "@react-navigation/native";
 import user from "../../../utils/user.json";
 import { loginApi } from "../../../utils/apicalls/loginApi";
+import { Button } from "react-native-paper";
 export default function LoginScreen() {
+  const { width, height } = Dimensions.get("screen");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +29,12 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ padding: 25 }}>
+      <Image
+        style={styles.image}
+        source={require("../../../assets/images/background/splash_background.png")}
+        resizeMode="cover" // Or "contain", depending on desired fit
+      />
+      <View style={{ padding: 25, marginTop: -150 }}>
         <Text style={styles.titleBrand}>Nj Housing</Text>
         <Text style={styles.title}>Sign in</Text>
 
@@ -74,23 +83,30 @@ export default function LoginScreen() {
           </View>
         )}
 
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-
+        <Button
+          onPress={handleLogin}
+          style={styles.loginButton}
+          textColor="white"
+        >
+          Login
+        </Button>
         <Text style={styles.signupPrompt}>Don’t have an account?</Text>
-        <TouchableOpacity
+        <Button
           style={styles.signupButton}
           onPress={() => navigation.navigate("Signup")}
         >
           <Text style={styles.signupText}>Create an Account</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  image: {
+    width: Dimensions.get("window").width,
+    height: 500,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -101,7 +117,6 @@ const styles = StyleSheet.create({
     color: "#1F1D5B",
     fontWeight: "500",
     marginBottom: 4,
-    fontFamily: "Hind-Jalandhar",
   },
   title: {
     fontSize: 40,
@@ -139,7 +154,6 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: "#3E5BF5",
-    paddingVertical: 16,
     borderRadius: 8,
     alignItems: "center",
     marginBottom: 24,
@@ -158,7 +172,6 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     backgroundColor: "#242933",
-    paddingVertical: 16,
     borderRadius: 8,
     alignItems: "center",
   },

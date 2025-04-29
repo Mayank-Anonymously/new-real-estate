@@ -7,6 +7,9 @@ import {
   Animated,
   Dimensions,
   ScrollView,
+  StatusBar,
+  SafeAreaView,
+  Image,
 } from "react-native";
 import LocationHeader from "../common/LocationHeader";
 import SearchBar from "./SearchBar";
@@ -53,14 +56,48 @@ const HomeScreen = () => {
   // };
 
   return (
-    <ScrollView style={styles.container}>
-      <LocationHeader />
-      <SearchBar />
-      <CustomText style={{ fontSize: 20, marginVertical: 11 }}>
-        Welcome to NJ housing
-      </CustomText>
-      {/* Toggle with sliding indicator */}
-      {/* <View style={styles.toggleContainer}>
+    <>
+      <StatusBar />
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView style={styles.container}>
+          {/* <Image
+            source={require("../../assets/images/background/splash_background.png")}
+            style={{
+              width: "100%",
+              height: 200,
+              position: "absolute",
+              top: 250,
+              zIndex: 10,
+              elevation: 10, // required for Android stacking
+            }}
+            resizeMode="contain"
+          /> */}
+          <LinearGradient
+            colors={["#917AFD", "#917AFD", "#6246EA"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={{
+              paddingBottom: 20, // Add padding if needed
+              height: 300,
+            }}
+          >
+            <LocationHeader />
+            <SearchBar />
+            <CustomText
+              style={{
+                color: "white",
+                fontSize: 20,
+                marginVertical: 11,
+                paddingHorizontal: 10,
+                textAlign: "center",
+              }}
+            >
+              Welcome to NJ housing
+            </CustomText>
+          </LinearGradient>
+
+          {/* Toggle with sliding indicator */}
+          {/* <View style={styles.toggleContainer}>
         <View style={{ flexDirection: "row", position: "relative" }}>
           <Animated.View
             style={[
@@ -74,7 +111,7 @@ const HomeScreen = () => {
           {renderButton("I want to list", 1)}
         </View>
       </View> */}
-      {/* <Animated.View
+          {/* <Animated.View
         style={[
           styles.slider,
           {
@@ -91,8 +128,16 @@ const HomeScreen = () => {
           <NeedToList />
         </View>
       </Animated.View> */}
-      <AvailableforRent />
-    </ScrollView>
+          <View
+            style={{
+              paddingHorizontal: 10,
+            }}
+          >
+            <AvailableforRent />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -102,7 +147,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FCFCFC",
-    paddingHorizontal: 10,
   },
   welcomeText: {
     fontSize: 17,

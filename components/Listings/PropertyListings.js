@@ -33,7 +33,7 @@ const RenderList = ({ item }) => {
   );
 };
 
-const Propertlistings = ({ closeBottomSheet }) => {
+const Propertlistings = () => {
   const navigation = useNavigation();
     const [ data  , setData] = useState([])
     useEffect(() =>  {
@@ -55,7 +55,6 @@ const Propertlistings = ({ closeBottomSheet }) => {
         <Pressable
           onPress={() => {
             navigation.goBack();
-            closeBottomSheet();
           }}
         >
           <Image

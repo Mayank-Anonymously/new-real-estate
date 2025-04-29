@@ -10,6 +10,7 @@ import {
   FlatList,
   Platform,
   Pressable,
+  StatusBar,
 } from "react-native";
 import {
   Ionicons,
@@ -67,6 +68,7 @@ export default function PropertyDetailScreen() {
   if (data.length === undefined )
   return (
     <>
+      <StatusBar />
       <View style={styles.container} showsVerticalScrollIndicator={false}>
         <View
           style={{
