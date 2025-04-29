@@ -66,14 +66,15 @@ const SplashScreen = () => {
         </Text>
 
         <Button
-          mode="contained"
+          mode="outlined"
+          outlineColor="#6246ea"
           onPress={() => navigation.navigate("Login")}
-          buttonColor="#567DF4"
           style={{
+            borderColor: "#6246ea",
             borderRadius: 9,
-            backgroundColor: "#3E5BF5",
-            marginHorizontal: 10,
+            marginHorizontal: 20,
             marginTop: 20,
+            marginRight: 40,
           }}
         >
           GET STARTED
@@ -92,11 +93,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   content: {
-    justifyContent: "center",
-    width: "100%",
-    height: 600,
-    // alignItems: "center",
-    position: "absolute",
+      justifyContent: "center",
+      width: "100%",
+      height: 600,
+      // alignItems: "center",
+      position: "absolute",
   },
   text: {
     fontSize: 12,

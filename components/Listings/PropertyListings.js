@@ -32,7 +32,7 @@ const RenderList = ({ item }) => {
   );
 };
 
-const Propertlistings = ({ closeBottomSheet }) => {
+const Propertlistings = () => {
   const navigation = useNavigation();
   return (
     <View style={{ backgroundColor: "white", alignItems: "center" }}>
@@ -49,7 +49,6 @@ const Propertlistings = ({ closeBottomSheet }) => {
         <Pressable
           onPress={() => {
             navigation.goBack();
-            closeBottomSheet();
           }}
         >
           <Image

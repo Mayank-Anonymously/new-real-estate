@@ -1,23 +1,34 @@
-import React, { useRef, useEffect, useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import React, { useRef, useState } from "react";
+import { View, StyleSheet } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import PropertyListings from "../Listings/PropertyListings"; // Fixed typo
+import { useFocusEffect } from "@react-navigation/native";
 
 const ExploreScreen = () => {
   // Create a reference for the bottom sheet
   const bottomSheetRef = useRef();
-  const [isSheetOpen, setIsSheetOpen] = useState(true);
 
-  // Open the bottom sheet when the component mounts
-  useEffect(() => {
-    if (isSheetOpen === true) {
+  // Open state, you can control whether the bottom sheet is open or closed
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  // Use useFocusEffect to open the bottom sheet when ExploreScreen is focused
+  useFocusEffect(
+    React.useCallback(() => {
+      // When the screen comes into focus, open the bottom sheet
       bottomSheetRef.current.open();
-    }
-  }, []);
+      setIsSheetOpen(true);
+
+      // Return a cleanup function to close the bottom sheet when leaving the screen
+      return () => {
+        bottomSheetRef.current.close();
+        setIsSheetOpen(false);
+      };
+    }, [])
+  );
 
   const closeBottomSheet = () => {
-    setIsSheetOpen(false); // Manually close the bottom sheet
     bottomSheetRef.current.close(); // Close it programmatically
+    setIsSheetOpen(false);
   };
 
   return (
@@ -25,21 +36,22 @@ const ExploreScreen = () => {
       {/* Bottom Sheet Component */}
       <RBSheet
         ref={bottomSheetRef}
-        height={600} // You can adjust the height as needed
-        closeOnDragDown={false} // Allows closing by dragging down
-        closeOnPressMask={false} // Disables backdrop (no dark overlay)
+        height={600}
+        closeOnDragDown={true} // Allows closing by dragging down
+        closeOnPressMask={true} // Allows closing by tapping outside
         customStyles={{
+          draggableIcon: {
+            backgroundColor: "#000",
+          },
           container: {
             borderTopLeftRadius: 30, // Rounded top-left corner
             borderTopRightRadius: 30, // Rounded top-right corner
-            overflow: "hidden", // Ensures the corners are rounded correctly
           },
         }}
       >
         {/* Property Listings inside the Bottom Sheet */}
         <View style={styles.bottomSheetContent}>
-          {/* Property Listings Component */}
-          <PropertyListings closeBottomSheet={closeBottomSheet} />
+          <PropertyListings />
         </View>
       </RBSheet>
     </View>
@@ -49,13 +61,9 @@ const ExploreScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "white",
   },
-  bottomSheetContent: {
-    flex: 1,
-  },
+
   closeButton: {
     alignSelf: "flex-end",
     backgroundColor: "#FF4C4C", // Red color for close button

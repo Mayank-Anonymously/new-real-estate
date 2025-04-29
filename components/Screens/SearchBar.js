@@ -19,9 +19,15 @@ const SearchBar = () => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.searchBar}>
-        <View style={{ flexDirection: "row" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <AntDesign
             name="search1"
             size={20}
@@ -49,9 +55,10 @@ export default SearchBar;
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     marginVertical: 10,
     elevation: 5,
+    marginTop: 50,
   },
   searchBar: {
     flexDirection: "row",

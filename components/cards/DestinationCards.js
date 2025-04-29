@@ -8,16 +8,16 @@ const InternationalMigrations = () => {
       <View style={styles.cardContainer}>
         <Card
           imageSource={{
-            uri: "https://www.shutterstock.com/image-photo/woman-backpack-exploring-bali-indonesia-600nw-1924363112.jpg",
+            uri: "https://images.unsplash.com/photo-1557335200-a65f7f032602?q=80&w=3558&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           }}
-          title="Bali, Indonesia"
+          title="Texas"
           subtitle="345 rented props"
         />
         <Card
           imageSource={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvOu3pUiwfD-vbV0j7cwtR04_1uTgoz5LxCQ&s",
+            uri: "https://images.unsplash.com/photo-1619083382085-9452906b7157?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhbGlmb3JuaWF8ZW58MHx8MHx8fDA%3D",
           }}
-          title="Yogyakarta, Indonesia"
+          title="California"
           subtitle="290 rented props"
         />
       </View>
