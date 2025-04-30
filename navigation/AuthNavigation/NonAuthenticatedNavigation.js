@@ -12,6 +12,7 @@ import LoginScreen from "../../components/Screens/Authentication/LoginScreen";
 import SignupScreen from "../../components/Screens/Authentication/SignupScreen";
 import PropertyDetailScreen from "../../components/Screens/PropertyDetail";
 import ContactQueryForm from "../../components/ContactQueryForm";
+import VerifyOTPScreen from "../../components/Screens/Authentication/VerifyOTP";
 
 const RootStack = createStackNavigator();
 
@@ -35,7 +36,11 @@ const RootStackNavigator = () => {
         options={{ headerShown: false, headerTitle: "" }}
         component={SignupScreen}
       ></RootStack.Screen>
-      
+      <RootStack.Screen
+        name="VerifyOtp"
+        options={{ headerShown: false, headerTitle: "" }}
+        component={VerifyOTPScreen}
+      ></RootStack.Screen>
       <RootStack.Screen
         name="Root"
         options={{ headerShown: false, headerTitle: "" }}

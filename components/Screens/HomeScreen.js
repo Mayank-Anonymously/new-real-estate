@@ -60,6 +60,7 @@ const HomeScreen = () => {
       <StatusBar />
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
+<<<<<<< Updated upstream
           <Image
             source={require("../../assets/images/background/picnic.png")}
             style={{
@@ -73,6 +74,9 @@ const HomeScreen = () => {
             }}
             resizeMode="contain"
           />
+=======
+      
+>>>>>>> Stashed changes
           <LinearGradient
             colors={["#917AFD", "#917AFD", "#6246EA"]}
             start={{ x: 0, y: 0 }}

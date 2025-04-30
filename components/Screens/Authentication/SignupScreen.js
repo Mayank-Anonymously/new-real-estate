@@ -8,15 +8,55 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
+import axios from "axios";
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function SignupScreen({ navigation }) {
+export default function SignupScreen() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [passcode, setPasscode] = useState("");
   const [confirmPasscode, setConfirmPasscode] = useState("");
   const [userType, setUserType] = useState("");
+  const navigation = useNavigation();
+  const handleSubmit = async () => {
+    console.log("Hit");
+    if (passcode !== confirmPasscode) {
+      Alert.alert("Error", "Passwords do not match!");
+      return;
+    }
 
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      password: passcode,
+    };
+    console.log(userData);
+    try {
+      // Make a POST request to the backend API
+      const response = await axios.post(
+        "http://192.168.1.10:9292/auth/register",
+        userData
+      );
+      // On success, navigate or show success message
+      Alert.alert("Success", response.data.message);
+      navigation.navigate("VerifyOtp"); // Go back to login or wherever you need
+    } catch (error) {
+      // Handle error if API call fails
+      if (error.response) {
+        // The request was made and the server responded with a status other than 2xx
+        Alert.alert("Error", error.response.data.message);
+      } else if (error.request) {
+        // The request was made but no response was received
+        Alert.alert("Error", "Network error. Please try again later.");
+      } else {
+        // Something happened in setting up the request
+        Alert.alert("Error", "An error occurred. Please try again.");
+      }
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -71,7 +111,7 @@ export default function SignupScreen({ navigation }) {
           onChangeText={setUserType}
         />
 
-        <TouchableOpacity style={styles.submitButton}>
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.submitText}>Submit</Text>
         </TouchableOpacity>
 
