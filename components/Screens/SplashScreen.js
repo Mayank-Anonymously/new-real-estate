@@ -35,7 +35,7 @@ const SplashScreen = () => {
           Welcome to{" "}
         </Text>
         <Text style={[styles.text, { fontSize: 46, fontWeight: "bold" }]}>
-          NJ housing
+          Affordable NJ Housing
         </Text>
         <Text
           style={[
@@ -93,11 +93,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   content: {
-      justifyContent: "center",
-      width: "100%",
-      height: 600,
-      // alignItems: "center",
-      position: "absolute",
+    justifyContent: "center",
+    width: "100%",
+    height: 600,
+    // alignItems: "center",
+    position: "absolute",
   },
   text: {
     fontSize: 12,

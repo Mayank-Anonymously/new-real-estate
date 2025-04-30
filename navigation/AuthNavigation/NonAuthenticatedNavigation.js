@@ -35,6 +35,7 @@ const RootStackNavigator = () => {
         options={{ headerShown: false, headerTitle: "" }}
         component={SignupScreen}
       ></RootStack.Screen>
+      
       <RootStack.Screen
         name="Root"
         options={{ headerShown: false, headerTitle: "" }}

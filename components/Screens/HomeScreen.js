@@ -60,25 +60,26 @@ const HomeScreen = () => {
       <StatusBar />
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
-          {/* <Image
-            source={require("../../assets/images/background/splash_background.png")}
+          <Image
+            source={require("../../assets/images/background/picnic.png")}
             style={{
-              width: "100%",
-              height: 200,
+              width: width / 1,
+              height: 250,
               position: "absolute",
               top: 250,
               zIndex: 10,
               elevation: 10, // required for Android stacking
+              opacity: 0.6,
             }}
             resizeMode="contain"
-          /> */}
+          />
           <LinearGradient
             colors={["#917AFD", "#917AFD", "#6246EA"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             style={{
               paddingBottom: 20, // Add padding if needed
-              height: 300,
+              height: 470,
             }}
           >
             <LocationHeader />
@@ -92,7 +93,7 @@ const HomeScreen = () => {
                 textAlign: "center",
               }}
             >
-              Welcome to NJ housing
+              Welcome to Affordable NJ Housing
             </CustomText>
           </LinearGradient>
 

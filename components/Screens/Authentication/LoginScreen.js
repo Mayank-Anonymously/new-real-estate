@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Image,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // You can use this with Expo
 import { useNavigation } from "@react-navigation/native";
@@ -19,23 +20,24 @@ export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const [error, setErros] = useState("");
   const handleLogin = () => {
-  
-      loginApi(email , password ,navigation , setErros)
-    
+    loginApi(email, password, navigation, setErros, setLoading);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../../../assets/images/background/splash_background.png")}
-        resizeMode="cover" // Or "contain", depending on desired fit
-      />
-      <View style={{ padding: 25, marginTop: -150 }}>
-        <Text style={styles.titleBrand}>Nj Housing</Text>
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <Image
+          style={styles.image}
+          source={require("../../../assets/images/background/login.png")}
+          resizeMode="cover" // Or "contain", depending on desired fit
+        />
+      </View>
+      <View style={{ padding: 25 }}>
+        <Text style={styles.titleBrand}>Affordable NJ Housing</Text>
         <Text style={styles.title}>Sign in</Text>
 
         <Text style={styles.label}>YOUR EMAIL</Text>
@@ -82,14 +84,16 @@ export default function LoginScreen() {
             <Text style={{ color: "#FF5D5D" }}>{error}</Text>
           </View>
         )}
+        <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+          <Button textColor="white">
+            {loading ? (
+              <ActivityIndicator color=" white" size={"small"} />
+            ) : (
+              "Login"
+            )}
+          </Button>
+        </TouchableOpacity>
 
-        <Button
-          onPress={handleLogin}
-          style={styles.loginButton}
-          textColor="white"
-        >
-          Login
-        </Button>
         <Text style={styles.signupPrompt}>Don’t have an account?</Text>
         <Button
           style={styles.signupButton}
@@ -104,8 +108,8 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   image: {
-    width: Dimensions.get("window").width,
-    height: 500,
+    width: 100,
+    height: 100,
   },
   container: {
     flex: 1,
