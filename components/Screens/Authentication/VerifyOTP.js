@@ -1,3 +1,5 @@
+import { useNavigation, useRoute } from "@react-navigation/native";
+import axios from "axios";
 import React, { useState } from "react";
 import {
   View,
@@ -7,72 +9,59 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
+  Alert,
 } from "react-native";
+import { handleVerify } from "../../../utils/apicalls/VerifyOTP";
 
 const VerifyOTPScreen = () => {
-  const [email, setEmail] = useState("");
+  const route = useRoute();
+  const { email } = route.params;
+  const navigation = useNavigation();
   const [otp, setOtp] = useState("");
-
-  const handleGetCode = () => {
-    // Logic to send OTP
-    console.log("Send OTP to:", email);
-  };
-
-  const handleVerify = () => {
-    // Logic to verify OTP
-    console.log("Verify OTP:", otp);
-  };
-
-  const handleNext = () => {
-    // Proceed to next screen
-    console.log("Next step");
-  };
+  const [loading, setLoading] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
+      <View style={{ marginHorizontal: 10 }}>
+        <View>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Image
+              style={styles.image}
+              source={require("../../../assets/images/background/login.png")}
+              resizeMode="cover" // Or "contain", depending on desired fit
+            />
+          </View>
+        </View>
 
-      {/* Title */}
-      <Text style={styles.title}>Sign up</Text>
-      <Text style={styles.subText}>VERIFY THROUGH EMAIL</Text>
+        {/* Title */}
+        <Text style={styles.title}>Sign up</Text>
+        <Text style={styles.subText}>VERIFY THROUGH EMAIL</Text>
 
-      {/* Email Input */}
-      <TextInput
-        style={styles.input}
-        placeholder="yourmail@shrestha.com"
-        keyboardType="email-address"
-        onChangeText={setEmail}
-        value={email}
-      />
+        {/* OTP Input with Get Code */}
+        <View style={styles.row}>
+          <TextInput
+            style={[styles.input, styles.otpInput]}
+            placeholder="***"
+            secureTextEntry
+            onChangeText={setOtp}
+            value={otp}
+          />
+        </View>
 
-      {/* OTP Input with Get Code */}
-      <View style={styles.row}>
-        <TextInput
-          style={[styles.input, styles.otpInput]}
-          placeholder="***"
-          secureTextEntry
-          onChangeText={setOtp}
-          value={otp}
-        />
-        <TouchableOpacity style={styles.codeButton} onPress={handleGetCode}>
-          <Text style={styles.buttonText}>Get code</Text>
+        {/* Verify Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>handleVerify(email, otp, navigation, setLoading)}
+        >
+          <Text style={styles.buttonText}>Verify</Text>
+        </TouchableOpacity>
+
+        {/* Back to Login */}
+        <TouchableOpacity>
+          <Text style={styles.backText}>back to login</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Verify Button */}
-      <TouchableOpacity style={styles.button} onPress={handleVerify}>
-        <Text style={styles.buttonText}>Verify</Text>
-      </TouchableOpacity>
-
-      {/* Next Button */}
-      <TouchableOpacity style={styles.button} onPress={handleNext}>
-        <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
-
-      {/* Back to Login */}
-      <TouchableOpacity>
-        <Text style={styles.backText}>back to login</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -83,8 +72,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 24,
+
     justifyContent: "center",
+  },
+  image: {
+    width: 100,
+    height: 100,
   },
   otpImage: {
     width: "100%",

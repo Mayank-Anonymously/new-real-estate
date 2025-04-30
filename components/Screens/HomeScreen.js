@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import AvailableforRent from "./HomeScreenComp/AvailableforRent";
 import NeedToList from "./HomeScreenComp/NeedToList";
 import CustomText from "../common/Text";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width } = Dimensions.get("window");
 
@@ -54,13 +55,19 @@ const HomeScreen = () => {
   //     </Pressable>
   //   );
   // };
+  const checking = async () => {
+    const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
+    console.log(AsyncStorage.getItem("isAuthenticated"));
+    console.log(typeof isAuthenticated);
+    return true;
+  };
+  console.log(checking());
 
   return (
     <>
       <StatusBar />
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
-<<<<<<< Updated upstream
           <Image
             source={require("../../assets/images/background/picnic.png")}
             style={{
@@ -74,9 +81,7 @@ const HomeScreen = () => {
             }}
             resizeMode="contain"
           />
-=======
-      
->>>>>>> Stashed changes
+
           <LinearGradient
             colors={["#917AFD", "#917AFD", "#6246EA"]}
             start={{ x: 0, y: 0 }}

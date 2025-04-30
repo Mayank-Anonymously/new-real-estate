@@ -9,12 +9,13 @@ import {
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import CustomText from "./common/Text";
+import { submitContactQuery } from "../utils/apicalls/submitQuery";
 
 const ContactQueryForm = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const { title, address } = route.params;
-
+  const [loading, setLoading] = useState(false);
   // State to hold form data
   const [formData, setFormData] = useState({
     title: title || "",
@@ -60,12 +61,12 @@ const ContactQueryForm = () => {
   };
 
   // Handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateForm()) {
+      await submitContactQuery(formData, navigation, setLoading);
       alert(
         "Your query has been received successfully. We will contact you shortly."
       );
-      navigation.goBack();
     } else {
       alert("Please fill in all the fields.");
     }
@@ -82,6 +83,7 @@ const ContactQueryForm = () => {
           placeholder="Property title"
           value={formData.title}
           onChangeText={(text) => handleInputChange("title", text)}
+          disabled={true}
         />
         {errors.title && (
           <Text style={styles.errorText}>This field is required</Text>
@@ -103,6 +105,7 @@ const ContactQueryForm = () => {
         <TextInput
           placeholder="Your name"
           value={formData.name}
+          disabled={true}
           onChangeText={(text) => handleInputChange("name", text)}
         />
         {errors.name && (
@@ -155,7 +158,7 @@ const ContactQueryForm = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {  
+  container: {
     padding: 16,
     backgroundColor: "white",
     flexGrow: 1,

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { HOST } from "../static";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const loginApi = async (
   email,
@@ -22,20 +23,27 @@ export const loginApi = async (
           "Content-Type": "application/json",
         },
       })
-      .then((response) => {
+      .then(async (response) => {
         setLoading(false);
-
         router.navigate("Root");
+        await AsyncStorage.setItem("isAuthenticated", "true");
+        await AsyncStorage.setItem("userEmail", email);
       })
       .catch((error) => {
         if (error.response) {
           setLoading(false);
 
-          setErros(error.response.data.message);
+          setErros(
+            error.response.data.message +
+              " " +
+              "or" +
+              " " +
+              "User Not Authenticated"
+          );
         } else {
           setLoading(false);
 
-          setErros(error.message);
+          setErros(error.message + " " + "or" + "User Not Authenticated");
         }
       });
   } catch (error) {
