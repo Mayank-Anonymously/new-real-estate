@@ -2,7 +2,7 @@
 import { Text, StyleSheet } from "react-native";
 import React from "react";
 
-const CustomText = ({ style, children, ...props }) => (
+const CustomTextLight = ({ style, children, ...props }) => (
   <Text style={[styles.text, style]} {...props}>
     {children}
   </Text>
@@ -10,8 +10,8 @@ const CustomText = ({ style, children, ...props }) => (
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: "Poppins-Light",
   },
 });
 
-export default CustomText;
+export default CustomTextLight;

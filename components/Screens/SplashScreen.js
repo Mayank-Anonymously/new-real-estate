@@ -5,12 +5,16 @@ import {
   View,
   Image,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import React, { useEffect } from "react";
 
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import CustomTextBold from "../common/BoldCustomtext";
+import CustomText from "../common/Text";
+import CustomTextLight from "../common/CustomTextLight";
 const SplashScreen = () => {
   const navigation = useNavigation();
 
@@ -25,32 +29,48 @@ const SplashScreen = () => {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <Image
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
+      <View style={{ marginHorizontal : 50}}>
+
+      {/* <Image
         source={require("../../assets/images/background/splash_background.png")}
         style={styles.content}
-      />
+      /> */}
 
-      <View style={{ marginLeft: 20, justifyContent: "flex-end", top: "60%" }}>
-        <Text style={[styles.text, { fontSize: 21, fontStyle: "italic" }]}>
-          Welcome to{" "}
-        </Text>
-        <Text style={[styles.text, { fontSize: 46, fontWeight: "bold" }]}>
-          Affordable NJ Housing
-        </Text>
-        <Text
+      <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+
+          <CustomTextBold style={{ fontSize: 38 , color: "#051138", }}>AFFORDABLE </CustomTextBold>
+          <CustomTextBold style={{ fontSize: 30  ,color: "#051138", }}>NJ <CustomText>HOUSING</CustomText> </CustomTextBold>
+        </View>
+        <Image source={require("../../assets/images/logo_comp/nj_house_map.png")} />
+      </View>
+      <View style={{  justifyContent: "center" , alignItems:"center" }}>
+  
+        <CustomText
           style={[
             styles.text,
             {
-              fontSize: 15,
-              color: "gray",
+              fontSize: 30,
               marginTop: 20,
               fontWeight: "200",
             },
           ]}
         >
-          Find the tenant, list your property in just a simple steps, in your
-          hand.
-        </Text>
+          Affordable Housing,
+        </CustomText>
+        <CustomText
+          style={[
+            styles.text,
+            {
+              
+              fontSize: 30,
+              fontWeight: "200",
+            },
+          ]}
+        >
+          Made Simple.
+        </CustomText>
         <Text
           style={[
             styles.text,
@@ -59,19 +79,23 @@ const SplashScreen = () => {
               color: "gray",
               marginTop: 30,
               fontWeight: "200",
+              textAlign :"center"
             },
           ]}
         >
-          You are one step away.
+     Find homes, check your eligibility, and
+      get expert guidance - all in one app
         </Text>
 
         <Button
-          mode="outlined"
+          mode="contained"
           outlineColor="#6246ea"
           onPress={() => navigation.navigate("Login")}
+          buttonColor="#051138"
           style={{
+            width : 300,
             borderColor: "#6246ea",
-            borderRadius: 9,
+            
             marginHorizontal: 20,
             marginTop: 20,
             marginRight: 40,
@@ -80,6 +104,8 @@ const SplashScreen = () => {
           GET STARTED
         </Button>
       </View>
+      </View>
+
     </SafeAreaView>
   );
 };
@@ -89,8 +115,10 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "white",
+  
   },
   content: {
     justifyContent: "center",
@@ -103,6 +131,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "500",
     color: "black",
-    fontFamily: "Hind-Jalandhar",
   },
 });

@@ -7,6 +7,8 @@ import InternationalMigrations from "../../cards/DestinationCards";
 import { useNavigation } from "@react-navigation/native";
 import states from "../../../utils/County.json";
 import { fetchallcounty } from "../../../utils/apicalls/fetchallcounty";
+import CustomText from "../../common/Text";
+import CustomTextBold from "../../common/BoldCustomtext";
 const height = Dimensions.get("window").height;
 const AvailableforRent = () => {
     const navigation = useNavigation();
@@ -18,9 +20,9 @@ const AvailableforRent = () => {
   return (
     <ScrollView>
       <View style={{ backgroundColor: "white", marginBottom: 60 }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 20 }}>
+        <CustomTextBold style={{ fontSize: 20,  marginTop: 20 }}>
           Near your location
-        </Text>
+        </CustomTextBold>
 
         <View
           style={{
@@ -29,7 +31,7 @@ const AvailableforRent = () => {
             alignItems: "center",
           }}
         >
-          <Paragraph style={{ color: "grey" }}>Properties in Dover</Paragraph>
+          <CustomText style={{ color: "grey" }}>Properties in Dover</CustomText>
           <Button
             style={{ width: 50, height: 40 }}
             labelStyle={{ fontSize: 12 }}
@@ -73,7 +75,7 @@ const AvailableforRent = () => {
               alignItems: "center",
             }}
           >
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Top Rated</Text>
+            <CustomTextBold style={{ fontSize: 20, }}>Top Rated</CustomTextBold>
             <Button
               style={{ width: 50, height: 40 }}
               labelStyle={{ fontSize: 12 }}

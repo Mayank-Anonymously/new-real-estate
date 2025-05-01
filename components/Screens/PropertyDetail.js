@@ -25,6 +25,7 @@ import { Avatar } from "react-native-paper";
 import MapView, { Marker } from "react-native-maps";
 import CustomText from "../common/Text";
 import { fetchpropdetails } from "../../utils/apicalls/fetchbytitle";
+import CustomTextBold from "../common/BoldCustomtext";
 
 export default function PropertyDetailScreen() {
   const route = useRoute();
@@ -143,9 +144,9 @@ export default function PropertyDetailScreen() {
                       }}
                     >
                       <View>
-                        <CustomText style={styles.title}>
+                        <CustomTextBold style={styles.title}>
                           {data.name}{" "}
-                        </CustomText>
+                        </CustomTextBold>
                       </View>
                       <View>
                         <EvilIcons name="heart" size={24} />
@@ -153,25 +154,29 @@ export default function PropertyDetailScreen() {
                     </View>
                     <View
                       style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
                         flex: 1,
-                        marginHorizontal: 20,
+                        marginHorizontal: 10,
                       }}
                     >
                       <View>
                         <View style={{ flexDirection: "row", margin: 10 }}>
+                        <Image
+                            source={require("../../assets/images/detail/star.png")}
+                            style={{ width : 25 , height : 25 , marginRight :10}}
+                            resizeMode="contain"
+                          
+                          />
                           <CustomText style={{ color: "#7D7F88" }}>
                             {" "}
-                            ⭐ 4.1 (66 reviews)
+                            4.1 (66 reviews)
                           </CustomText>
                         </View>
-                        <View style={{ flexDirection: "row", margin: 10 }}>
-                          <Ionicons
-                            name="bed-outline"
-                            size={20}
-                            color="#7D7F88"
+                        <View style={{ flexDirection: "row", margin: 10 ,  alignItems :"center" }}>
+                          <Image
+                            source={require("../../assets/images/detail/bed.png")}
+                            style={{ width : 25 , height : 25 , marginRight :10}}
+                            resizeMode="contain"
+                          
                           />
                           <CustomText style={{ color: "#7D7F88" }}>
                             {unit.bedrooms} room{" "}
@@ -179,32 +184,30 @@ export default function PropertyDetailScreen() {
                         </View>
                       </View>
                       <View>
-                        <View style={{ flexDirection: "row", margin: 10 }}>
-                          <EvilIcons
-                            name="location"
-                            size={20}
-                            color="#7D7F88"
+                        <View style={{ flexDirection: "row", margin: 10 ,}}>
+                        <Image
+                            source={require("../../assets/images/detail/location.png")}
+                            style={{ width : 25 , height : 25 , marginRight : 10}}
+                            resizeMode="contain"
+                          
                           />
                           <CustomText numberOfLines={3}>
-                            {data.address.split(" ")[0] +
-                              data.address.split(" ")[1] +
-                              "\n" +
-                              data.address
-                                .split(" ")
-                                .slice(2)
-                                .join(" ")}
+                            {data.address}
                           </CustomText>
                         </View>
-                        <View style={{ flexDirection: "row", margin: 10 }}>
-                          <MaterialIcons
-                            name="house-siding"
-                            size={20}
-                            color="#7D7F88"
-                          />
+                        {unit.sizeSqFt &&
+                        <View style={{ flexDirection: "row", margin: 10  }}>
+                        <Image
+                            source={require("../../assets/images/detail/sq.png")}
+                            style={{ width : 25 , height : 25}}
+                            resizeMode="contain"
+                            
+                            />
                           <CustomText style={{ color: "#7D7F88" }}>
                             {unit.sizeSqFt} sqft
                           </CustomText>
                         </View>
+                          }
                       </View>
                     </View>
 
@@ -600,7 +603,6 @@ const styles = StyleSheet.create({
   content: { paddingHorizontal: 16, marginBottom: 50 },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
     color: "#1F1D5B",
     marginBottom: 4,
   },

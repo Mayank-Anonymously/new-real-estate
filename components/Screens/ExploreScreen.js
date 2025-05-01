@@ -38,7 +38,7 @@ const ExploreScreen = () => {
         ref={bottomSheetRef}
         height={600}
         closeOnDragDown={true} // Allows closing by dragging down
-        closeOnPressMask={true} // Allows closing by tapping outside
+        closeOnPressMask={false} // Allows closing by tapping outside
         customStyles={{
           draggableIcon: {
             backgroundColor: "#000",

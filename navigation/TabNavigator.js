@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, Animated, View, Dimensions, Image } from "react-native";
 import StackNavigator from "./StackNavigator";
@@ -12,22 +12,35 @@ import Explore from "../assets/tabbaricon/explore.png";
 import ExploreActive from "../assets/tabbaricon/explore-fill.png";
 import Profile from "../assets/tabbaricon/profile.png";
 import ProfileActive from "../assets/tabbaricon/profile-fill.png";
+import { useNavigationState, useRoute } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 const { width } = Dimensions.get("window");
 
 const TabNavigator = () => {
+
   const tabWidth = width / 3;
   const INDICATOR_WIDTH = 20; // <- fixed width of indicator
   const translateX = useRef(new Animated.Value(0)).current;
 
   const moveIndicator = (index) => {
-    const offset = index * tabWidth + tabWidth / 2 - INDICATOR_WIDTH / 2;
+    const idx = index ?  index : 0
+    const offset = idx * tabWidth + tabWidth / 2 - INDICATOR_WIDTH / 2;
     Animated.spring(translateX, {
       toValue: offset,
       useNativeDriver: true,
     }).start();
   };
+
+  
+  // ✅ Hook to monitor current tab index and update indicator
+  const routeNameRef = useRef();
+  const navigationState = useNavigationState((state) => state);
+    console.log(navigationState)
+  useEffect(() => {
+    const index = navigationState?.index ?? 0;
+    moveIndicator(index);
+  }, [navigationState?.index]);
 
   return (
     <View style={{ flex: 1 }}>

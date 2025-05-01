@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import CustomText from "../common/Text";
+import CustomTextBold from "../common/BoldCustomtext";
 
 const InternationalMigrations = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>International Migrations</Text>
+      <CustomText style={styles.title}>International Migrations</CustomText>
       <View style={styles.cardContainer}>
         <Card
           imageSource={{
@@ -34,14 +36,14 @@ const InternationalMigrations = () => {
           />
         </View>
         <View>
-          <Text style={styles.hostTitle}>
+          <CustomTextBold style={styles.hostTitle}>
             Want to host your {"\n"} own place?
-          </Text>
+          </CustomTextBold>
           <Text></Text>
-          <Text style={styles.hostSubtitle}>
+          <CustomText style={styles.hostSubtitle}>
             Earn passive income by
             {"\n"}renting or selling your
-          </Text>
+          </CustomText>
         </View>
       </View>
     </View>
@@ -51,8 +53,8 @@ const InternationalMigrations = () => {
 const Card = ({ imageSource, title, subtitle }) => (
   <View style={styles.card}>
     <Image source={imageSource} style={styles.cardImage} />
-    <Text style={styles.cardTitle}>{title}</Text>
-    <Text style={styles.cardSubtitle}>{subtitle}</Text>
+    <CustomText style={styles.cardTitle}>{title}</CustomText>
+    <CustomText style={styles.cardSubtitle}>{subtitle}</CustomText>
   </View>
 );
 
@@ -101,7 +103,6 @@ const styles = StyleSheet.create({
   },
   hostTitle: {
     fontSize: 18,
-    fontWeight: "bold",
     color: "white",
     marginLeft: 40,
   },

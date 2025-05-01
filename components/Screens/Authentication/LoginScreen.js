@@ -15,6 +15,8 @@ import { useNavigation } from "@react-navigation/native";
 import user from "../../../utils/user.json";
 import { loginApi } from "../../../utils/apicalls/loginApi";
 import { Button } from "react-native-paper";
+import CustomText from "../../common/Text";
+import CustomTextBold from "../../common/BoldCustomtext";
 export default function LoginScreen() {
   const { width, height } = Dimensions.get("screen");
   const [email, setEmail] = useState("");
@@ -37,10 +39,10 @@ export default function LoginScreen() {
         />
       </View>
       <View style={{ padding: 25 }}>
-        <Text style={styles.titleBrand}>Affordable NJ Housing</Text>
-        <Text style={styles.title}>Sign in</Text>
+        <CustomTextBold style={styles.titleBrand}>Affordable NJ Housing</CustomTextBold>
+        <CustomText style={styles.title}>Sign in</CustomText>
 
-        <Text style={styles.label}>YOUR EMAIL</Text>
+        <CustomText style={styles.label}>YOUR EMAIL</CustomText>
         <TextInput
           style={styles.input}
           placeholder="Enter email"
@@ -51,7 +53,7 @@ export default function LoginScreen() {
           onChangeText={setEmail}
         />
 
-        <Text style={styles.label}>PASSWORD</Text>
+        <CustomText style={styles.label}>PASSWORD</CustomText>
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.inputPassword}
@@ -81,7 +83,7 @@ export default function LoginScreen() {
               marginBottom: 10,
             }}
           >
-            <Text style={{ color: "#FF5D5D" }}>{error}</Text>
+            <CustomText style={{ color: "#FF5D5D" }}>{error}</CustomText>
           </View>
         )}
         <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
@@ -94,12 +96,12 @@ export default function LoginScreen() {
           </Button>
         </TouchableOpacity>
 
-        <Text style={styles.signupPrompt}>Don’t have an account?</Text>
+        <CustomText style={styles.signupPrompt}>Don’t have an account?</CustomText>
         <Button
           style={styles.signupButton}
           onPress={() => navigation.navigate("Signup")}
         >
-          <Text style={styles.signupText}>Create an Account</Text>
+          <CustomText style={styles.signupText}>Create an Account</CustomText>
         </Button>
       </View>
     </SafeAreaView>
@@ -124,16 +126,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: "700",
     color: "#1F1D5B",
-    marginBottom: 32,
-    fontFamily: "Hind-Jalandhar",
+    marginBottom: 20,
   },
   label: {
     fontSize: 12,
     color: "#999",
     marginBottom: 6,
-    fontFamily: "Hind-Jalandhar",
   },
   input: {
     backgroundColor: "#F2F2F2",

@@ -54,6 +54,7 @@ const Propertlistings = () => {
       >
         <Pressable
           onPress={() => {
+
             navigation.goBack();
           }}
         >
@@ -63,7 +64,7 @@ const Propertlistings = () => {
           />
         </Pressable>
         <Text style={{ fontWeight: "bold", color: "#1A1E25", fontSize: 19 }}>
-          Showing {data.length} Results
+          Showing Results
         </Text>
         <Text>
           <Ionicons name="filter-outline" size={23} color="black" />

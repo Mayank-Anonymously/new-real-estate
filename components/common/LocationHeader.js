@@ -10,6 +10,7 @@ import React from "react";
 import { Foundation, Entypo, EvilIcons } from "react-native-vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "./Text";
+import CustomTextBold from "./BoldCustomtext";
 
 const LocationHeader = () => {
   const navigation = useNavigation();
@@ -36,16 +37,15 @@ const LocationHeader = () => {
                 borderRadius: 10,
               }}
             />
-            <CustomText
+            <CustomTextBold
               style={{
                 fontSize: 14,
                 marginLeft: 5,
                 color: "white",
-                fontWeight: "bold",
               }}
             >
               New Jersey
-            </CustomText>
+            </CustomTextBold>
             <Entypo
               name="chevron-down"
               color="white"
