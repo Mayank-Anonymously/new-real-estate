@@ -12,7 +12,7 @@ export const SignupAPI = async (
   setLoading(true);
   console.log(userData);
   if (passcode !== confirmPasscode) {
-    setLoading(true);
+    setLoading(false);
 
     Alert.alert("Error", "Passwords do not match!");
     return;

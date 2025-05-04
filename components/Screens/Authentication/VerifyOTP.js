@@ -10,6 +10,7 @@ import {
   Image,
   SafeAreaView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { handleVerify } from "../../../utils/apicalls/VerifyOTP";
 
@@ -50,11 +51,16 @@ const VerifyOTPScreen = () => {
         </View>
 
         {/* Verify Button */}
+
         <TouchableOpacity
-          style={styles.button}
-          onPress={() =>handleVerify(email, otp, navigation, setLoading)}
+          style={styles.submitButton}
+          onPress={() => handleVerify(email, otp, navigation, setLoading)}
         >
-          <Text style={styles.buttonText}>Verify</Text>
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff" />
+          ) : (
+            <Text style={styles.submitText}>Verify</Text>
+          )}
         </TouchableOpacity>
 
         {/* Back to Login */}
@@ -74,6 +80,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
 
     justifyContent: "center",
+  },
+  submitText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "600",
   },
   image: {
     width: 100,
@@ -119,11 +130,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 8,
   },
-  button: {
-    backgroundColor: "#3E5AEF",
+  submitButton: {
+    backgroundColor: "#3E5BF5",
     paddingVertical: 16,
     borderRadius: 8,
-    marginTop: 10,
+    alignItems: "center",
+    marginTop: 8,
+    marginBottom: 24,
+    justifyContent: "center",
   },
   buttonText: {
     color: "#fff",

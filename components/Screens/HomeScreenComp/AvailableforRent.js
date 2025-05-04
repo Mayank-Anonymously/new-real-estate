@@ -11,16 +11,19 @@ import CustomText from "../../common/Text";
 import CustomTextBold from "../../common/BoldCustomtext";
 const height = Dimensions.get("window").height;
 const AvailableforRent = () => {
-    const navigation = useNavigation();
-  const [ data  , setData] = useState([])
-  useEffect(() =>  {
-    fetchallcounty(setData)
-  } ,  [])
+  const navigation = useNavigation();
+  const [data, setData] = useState([]);
+  const [otherCity, setOtherCity] = useState([]);
+
+  useEffect(() => {
+    fetchallcounty(setData, "Dover");
+    fetchallcounty(setOtherCity, "Clifton");
+  }, []);
 
   return (
     <ScrollView>
       <View style={{ backgroundColor: "white", marginBottom: 60 }}>
-        <CustomTextBold style={{ fontSize: 20,  marginTop: 20 }}>
+        <CustomTextBold style={{ fontSize: 20, marginTop: 20 }}>
           Near your location
         </CustomTextBold>
 
@@ -43,28 +46,23 @@ const AvailableforRent = () => {
         </View>
         <View>
           <ScrollView horizontal={true}>
-            {data
-              .filter((ite) => ite.address.includes("Dover"))
-              .map((item, index) => {
-                console.log(item.price)
-                item.price= item.price ===  undefined ?  "N/A" : item.price
-                return (
-                  <PropertyCard
-                    onPress={() =>
-                      navigation.navigate("PropertyDetail", {
-                        title: item.title,
-                        image: item.image,
-                        rent: item.price,
-                      })
-                    }
-                    title={item.title}
-                    location={item.address}
-                    price={item.price}
-                    description={item.description}
-                    image={item.image}
-                  />
-                );
-              })}
+            {data.map((item, index) => {
+              item.price = item.price === undefined ? "N/A" : item.price;
+              return (
+                <PropertyCard
+                  onPress={() =>
+                    navigation.navigate("PropertyDetail", {
+                      id: item._id,
+                    })
+                  }
+                  title={item.title}
+                  location={item.address}
+                  price={item.price}
+                  description={item.description}
+                  image={item.image}
+                />
+              );
+            })}
           </ScrollView>
         </View>
         <View>
@@ -75,7 +73,7 @@ const AvailableforRent = () => {
               alignItems: "center",
             }}
           >
-            <CustomTextBold style={{ fontSize: 20, }}>Top Rated</CustomTextBold>
+            <CustomTextBold style={{ fontSize: 20 }}>Top Rated</CustomTextBold>
             <Button
               style={{ width: 50, height: 40 }}
               labelStyle={{ fontSize: 12 }}
@@ -85,26 +83,22 @@ const AvailableforRent = () => {
             </Button>
           </View>
           <ScrollView horizontal={true}>
-            {data
-              .filter((ite) => ite.address.includes("Clifton"))
-              .map((item, index) => {
-                return (
-                  <PropertyCard
-                    onPress={() =>
-                      navigation.navigate("PropertyDetail", {
-                        title: item.title,
-                        rent: item.price,
-                        image: item.image,
-                      })
-                    }
-                    title={item.title}
-                    location={item.address}
-                    price={item.price}
-                    description={item.description}
-                    image={item.image}
-                  />
-                );
-              })}
+            {otherCity.map((item, index) => {
+              return (
+                <PropertyCard
+                  onPress={() =>
+                    navigation.navigate("PropertyDetail", {
+                      id: item._id,
+                    })
+                  }
+                  title={item.title}
+                  location={item.address}
+                  price={item.price}
+                  description={item.description}
+                  image={item.image}
+                />
+              );
+            })}
           </ScrollView>
         </View>
         <InternationalMigrations />

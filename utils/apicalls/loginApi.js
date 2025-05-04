@@ -29,6 +29,7 @@ export const loginApi = async (
         await AsyncStorage.setItem("isAuthenticated", "true");
         await AsyncStorage.setItem("userEmail", email);
       })
+
       .catch((error) => {
         if (error.response) {
           setLoading(false);

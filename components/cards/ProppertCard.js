@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import CustomText from "../common/Text";
+import { Button } from "react-native-paper";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -33,48 +34,55 @@ const PropertyCard = ({
   }, []);
 
   return (
-    <Pressable onPress={onPress}>
-      <View style={styles.card}>
-        <Image
-          source={{
-            uri: image,
-          }}
-          style={styles.image}
-        />
-        <View style={styles.content}>
-          <View>
-            <View style={styles.ratingRow}>
-              <FontAwesome name="star" size={14} color="#FFA500" />
-              <CustomText style={styles.ratingText}>4.8 (73)</CustomText>
-            </View>
-            <CustomText
-              style={styles.title}
-              numberOfLines={2}
-              ellipsizeMode="tail"
-            >
-              {title}
-            </CustomText>
-            <CustomText style={styles.location}>{location}</CustomText>
+    <>
+      <Pressable onPress={onPress}>
+        <View style={styles.card}>
+          <Image
+            source={{
+              uri: "https://api.mylavya.com/resources/placeholder.jpeg",
+            }}
+            style={styles.image}
+          />
+          <View style={styles.content}>
+            <View>
+              <View style={styles.ratingRow}></View>
+              <CustomText
+                style={styles.title}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+              >
+                {title}
+              </CustomText>
+              <CustomText style={styles.location}>{location}</CustomText>
 
-            <View style={styles.infoRow}>
-              <View style={styles.iconText}>
-                <Ionicons name="bed-outline" size={16} color="#888" />
-                <CustomText style={styles.infoText}>{description}</CustomText>
+              <View style={styles.infoRow}>
+                <View style={styles.iconText}>
+                  <Ionicons name="bed-outline" size={16} color="#888" />
+                  <CustomText style={styles.infoText}>{description}</CustomText>
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.footer}>
-            <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-              <CustomText style={styles.price}>${price}</CustomText>
-              <CustomText style={styles.perMonth}>/month</CustomText>
+            <View style={styles.footer}>
+              <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+                <Button
+                  textColor="white"
+                  mode="contained"
+                  style={{}}
+                  buttonColor="#917AFD"
+                >
+                  Contact
+                </Button>
+              </View>
+              <TouchableOpacity>
+                <CustomText style={styles.ratingText}>
+                  <FontAwesome name="star" size={14} color="#FFA500" /> 4.8{" "}
+                </CustomText>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity>
-              <Ionicons name="heart-outline" size={20} color="#aaa" />
-            </TouchableOpacity>
           </View>
         </View>
-      </View>
-    </Pressable>
+      </Pressable>
+    </>
   );
 };
 

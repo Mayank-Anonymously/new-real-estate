@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Slider, Button, Picker, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Slider,
+  Button,
+  Picker,
+  ScrollView,
+} from "react-native";
 
 const FilterScreen = ({ onApplyFilters }) => {
   // State to hold the filter criteria
@@ -34,46 +43,50 @@ const FilterScreen = ({ onApplyFilters }) => {
         <Text style={styles.label}>Price Range</Text>
         <View style={styles.sliderContainer}>
           <Text>Min: ${minPrice}</Text>
-          <Slider
+          {/* <Slider
             style={styles.slider}
             minimumValue={0}
             maximumValue={1000000}
             step={5000}
             value={minPrice}
             onValueChange={setMinPrice}
-          />
+          /> */}
         </View>
         <View style={styles.sliderContainer}>
           <Text>Max: ${maxPrice}</Text>
-          <Slider
+          {/* <Slider
             style={styles.slider}
             minimumValue={0}
             maximumValue={1000000}
             step={5000}
             value={maxPrice}
             onValueChange={setMaxPrice}
-          />
+          /> */}
         </View>
       </View>
 
       {/* Number of Bedrooms Filter */}
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Bedrooms</Text>
-        <Picker
+        {/* <Picker
           selectedValue={bedrooms}
           style={styles.picker}
           onValueChange={(itemValue) => setBedrooms(itemValue)}
         >
           {[1, 2, 3, 4, 5].map((value) => (
-            <Picker.Item key={value} label={`${value} Bedroom${value > 1 ? "s" : ""}`} value={value} />
+            <Picker.Item
+              key={value}
+              label={`${value} Bedroom${value > 1 ? "s" : ""}`}
+              value={value}
+            />
           ))}
-        </Picker>
+        </Picker> */}
       </View>
 
       {/* Property Type Filter */}
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Property Type</Text>
-        <Picker
+        {/* <Picker
           selectedValue={propertyType}
           style={styles.picker}
           onValueChange={(itemValue) => setPropertyType(itemValue)}
@@ -82,7 +95,7 @@ const FilterScreen = ({ onApplyFilters }) => {
           <Picker.Item label="House" value="House" />
           <Picker.Item label="Villa" value="Villa" />
           <Picker.Item label="Land" value="Land" />
-        </Picker>
+        </Picker> */}
       </View>
 
       {/* Apply Filters Button */}

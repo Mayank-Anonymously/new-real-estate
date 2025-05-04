@@ -30,82 +30,84 @@ const SplashScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
-      <View style={{ marginHorizontal : 50}}>
-
-      {/* <Image
-        source={require("../../assets/images/background/splash_background.png")}
-        style={styles.content}
-      /> */}
-
-      <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-
-          <CustomTextBold style={{ fontSize: 38 , color: "#051138", }}>AFFORDABLE </CustomTextBold>
-          <CustomTextBold style={{ fontSize: 30  ,color: "#051138", }}>NJ <CustomText>HOUSING</CustomText> </CustomTextBold>
-        </View>
-        <Image source={require("../../assets/images/logo_comp/nj_house_map.png")} />
-      </View>
-      <View style={{  justifyContent: "center" , alignItems:"center" }}>
-  
-        <CustomText
-          style={[
-            styles.text,
-            {
-              fontSize: 30,
-              marginTop: 20,
-              fontWeight: "200",
-            },
-          ]}
-        >
-          Affordable Housing,
-        </CustomText>
-        <CustomText
-          style={[
-            styles.text,
-            {
-              
-              fontSize: 30,
-              fontWeight: "200",
-            },
-          ]}
-        >
-          Made Simple.
-        </CustomText>
-        <Text
-          style={[
-            styles.text,
-            {
-              fontSize: 15,
-              color: "gray",
-              marginTop: 30,
-              fontWeight: "200",
-              textAlign :"center"
-            },
-          ]}
-        >
-     Find homes, check your eligibility, and
-      get expert guidance - all in one app
-        </Text>
-
-        <Button
-          mode="contained"
-          outlineColor="#6246ea"
-          onPress={() => navigation.navigate("Login")}
-          buttonColor="#051138"
+      <View style={{ marginHorizontal: 50 }}>
+        <View
           style={{
-            width : 300,
-            borderColor: "#6246ea",
-            
-            marginHorizontal: 20,
-            marginTop: 20,
-            marginRight: 40,
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
           }}
         >
-          GET STARTED
-        </Button>
-      </View>
-      </View>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <CustomTextBold style={{ fontSize: 38, color: "#051138" }}>
+              AFFORDABLE{" "}
+            </CustomTextBold>
+            <CustomTextBold style={{ fontSize: 30, color: "#051138" }}>
+              NJ <CustomText>HOUSING</CustomText>{" "}
+            </CustomTextBold>
+          </View>
+          <Image
+            source={require("../../assets/images/logo_comp/nj_house_map.png")}
+          />
+        </View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <CustomText
+            style={[
+              styles.text,
+              {
+                fontSize: 30,
+                marginTop: 20,
+                fontWeight: "200",
+              },
+            ]}
+          >
+            Affordable Housing,
+          </CustomText>
+          <CustomText
+            style={[
+              styles.text,
+              {
+                fontSize: 30,
+                fontWeight: "200",
+              },
+            ]}
+          >
+            Made Simple.
+          </CustomText>
+          <Text
+            style={[
+              styles.text,
+              {
+                fontSize: 15,
+                color: "gray",
+                marginTop: 30,
+                fontWeight: "200",
+                textAlign: "center",
+              },
+            ]}
+          >
+            Find homes, check your eligibility, and get expert guidance - all in
+            one app
+          </Text>
 
+          <Button
+            mode="contained"
+            outlineColor="#6246ea"
+            onPress={() => navigation.navigate("Login")}
+            buttonColor="#051138"
+            style={{
+              width: 300,
+              borderColor: "#6246ea",
+
+              marginHorizontal: 20,
+              marginTop: 20,
+              marginRight: 20,
+            }}
+          >
+            GET STARTED
+          </Button>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -118,7 +120,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-  
   },
   content: {
     justifyContent: "center",

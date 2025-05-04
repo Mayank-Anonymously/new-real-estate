@@ -17,6 +17,7 @@ import { loginApi } from "../../../utils/apicalls/loginApi";
 import { Button } from "react-native-paper";
 import CustomText from "../../common/Text";
 import CustomTextBold from "../../common/BoldCustomtext";
+import CustomTextSemi from "../../common/CustomTextSemi";
 export default function LoginScreen() {
   const { width, height } = Dimensions.get("screen");
   const [email, setEmail] = useState("");
@@ -31,21 +32,43 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <CustomTextBold style={{ fontSize: 38, color: "#051138" }}>
+            AFFORDABLE{" "}
+          </CustomTextBold>
+          <CustomTextBold style={{ fontSize: 30, color: "#051138" }}>
+            NJ <CustomText>HOUSING</CustomText>{" "}
+          </CustomTextBold>
+        </View>
         <Image
-          style={styles.image}
-          source={require("../../../assets/images/background/login.png")}
-          resizeMode="cover" // Or "contain", depending on desired fit
+          source={require("../../../assets/images/logo_comp/nj_house_map.png")}
         />
       </View>
       <View style={{ padding: 25 }}>
-        <CustomTextBold style={styles.titleBrand}>Affordable NJ Housing</CustomTextBold>
-        <CustomText style={styles.title}>Sign in</CustomText>
+        <CustomTextSemi
+          style={[
+            styles.title,
+            {
+              marginBottom: 5,
+            },
+          ]}
+        >
+          Sign in
+        </CustomTextSemi>
+        <CustomText style={[styles.title, { fontSize: 18, color: "#696969" }]}>
+          Welcome back! Sign in to continue.
+        </CustomText>
 
-        <CustomText style={styles.label}>YOUR EMAIL</CustomText>
         <TextInput
           style={styles.input}
-          placeholder="Enter email"
+          placeholder="Your email"
           placeholderTextColor="#999"
           keyboardType="email-address"
           autoCapitalize="none"
@@ -53,11 +76,10 @@ export default function LoginScreen() {
           onChangeText={setEmail}
         />
 
-        <CustomText style={styles.label}>PASSWORD</CustomText>
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.inputPassword}
-            placeholder="••••••••"
+            placeholder="Password"
             placeholderTextColor="#999"
             secureTextEntry={!showPassword}
             value={password}
@@ -75,28 +97,26 @@ export default function LoginScreen() {
         {error && (
           <View
             style={{
-              backgroundColor: "#ffd1d1",
-              borderWidth: 1,
-              borderColor: "#ff0000",
-              padding: 20,
-              borderRadius: 10,
-              marginBottom: 10,
+              padding: 5,
             }}
           >
             <CustomText style={{ color: "#FF5D5D" }}>{error}</CustomText>
           </View>
         )}
         <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
-          <Button textColor="white">
+          <Text style={{ color: "white", fontSize: 18 }}>
             {loading ? (
               <ActivityIndicator color=" white" size={"small"} />
             ) : (
               "Login"
             )}
-          </Button>
+          </Text>
         </TouchableOpacity>
 
-        <CustomText style={styles.signupPrompt}>Don’t have an account?</CustomText>
+        <CustomText style={styles.signupPrompt}>
+          Don’t have an account?
+        </CustomText>
+
         <Button
           style={styles.signupButton}
           onPress={() => navigation.navigate("Signup")}
@@ -140,30 +160,34 @@ const styles = StyleSheet.create({
     padding: 14,
     fontSize: 16,
     marginBottom: 20,
+    height: 50,
   },
   passwordContainer: {
     backgroundColor: "#F2F2F2",
     borderRadius: 8,
     paddingHorizontal: 14,
-    paddingVertical: 10,
+    // paddingVertical: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 32,
   },
   inputPassword: {
     flex: 1,
     fontSize: 16,
+    height: 50,
   },
   loginButton: {
     backgroundColor: "#3E5BF5",
     borderRadius: 8,
     alignItems: "center",
     marginBottom: 24,
+    height: 45,
+    justifyContent: "center",
+    color: "white",
   },
   loginText: {
-    color: "#fff",
-    fontSize: 18,
+    color: "white",
+    fontSize: 20,
     fontWeight: "600",
   },
   signupPrompt: {
@@ -174,12 +198,13 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   signupButton: {
-    backgroundColor: "#242933",
+    borderWidth: 1,
+    borderColor: "#242933",
     borderRadius: 8,
     alignItems: "center",
   },
   signupText: {
-    color: "#fff",
+    color: "#242933",
     fontSize: 16,
   },
 });

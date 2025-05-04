@@ -6,6 +6,8 @@ import {
   FlatList,
   Image,
   Pressable,
+  Modal,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import PropertyCard from "../cards/ProppertCard";
@@ -13,6 +15,8 @@ import states from "../../utils/County.json";
 import { Ionicons } from "react-native-vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { fetchallcounty } from "../../utils/apicalls/fetchallcounty";
+import FilterScreen from "../Screens/FilterScreen";
+import { fetchallcity } from "../../utils/apicalls/fetchall";
 const RenderList = ({ item }) => {
   const navigation = useNavigation();
 
@@ -35,11 +39,12 @@ const RenderList = ({ item }) => {
 
 const Propertlistings = () => {
   const navigation = useNavigation();
-    const [ data  , setData] = useState([])
-    useEffect(() =>  {
-      fetchallcounty(setData)
-    } ,  [])
-  
+  const [data, setData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  useEffect(() => {
+    fetchallcity(setData);
+  }, []);
+
   return (
     <View style={{ backgroundColor: "white", alignItems: "center" }}>
       <View
@@ -54,7 +59,6 @@ const Propertlistings = () => {
       >
         <Pressable
           onPress={() => {
-
             navigation.goBack();
           }}
         >
@@ -67,9 +71,16 @@ const Propertlistings = () => {
           Showing Results
         </Text>
         <Text>
-          <Ionicons name="filter-outline" size={23} color="black" />
+          <Ionicons
+            name="filter-outline"
+            onPress={() => setModalVisible(true)}
+            size={23}
+            color="black"
+          />
         </Text>
       </View>
+      {modalVisible && <FilterScreen />}
+
       <FlatList
         data={data}
         renderItem={({ item }) => <RenderList item={item} />}
@@ -81,4 +92,18 @@ const Propertlistings = () => {
 
 export default Propertlistings;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+});

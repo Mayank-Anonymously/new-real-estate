@@ -18,6 +18,7 @@ import AvailableforRent from "./HomeScreenComp/AvailableforRent";
 import NeedToList from "./HomeScreenComp/NeedToList";
 import CustomText from "../common/Text";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { fetchSearchProperties } from "../../utils/apicalls/searchquery";
 
 const { width } = Dimensions.get("window");
 
@@ -25,7 +26,6 @@ const HomeScreen = () => {
   const [active, setActive] = useState("I need to rent");
   const translateX = useRef(new Animated.Value(0)).current;
   const indicatorX = useRef(new Animated.Value(0)).current;
-
   // const handleTabPress = (tab, index) => {
   //   setActive(tab);
 
@@ -55,13 +55,13 @@ const HomeScreen = () => {
   //     </Pressable>
   //   );
   // };
-  const checking = async () => {
-    const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
-    console.log(AsyncStorage.getItem("isAuthenticated"));
-    console.log(typeof isAuthenticated);
-    return true;
-  };
-  console.log(checking());
+
+  // const checking = async () => {
+  //   const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
+  //   console.log(AsyncStorage.getItem("isAuthenticated"));
+  //   console.log(typeof isAuthenticated);
+  //   return true;
+  // };
 
   return (
     <>
@@ -74,10 +74,10 @@ const HomeScreen = () => {
               width: width / 1,
               height: 250,
               position: "absolute",
-              top: 250,
+              top: 220,
               zIndex: 10,
               elevation: 10, // required for Android stacking
-              opacity: 0.6,
+              opacity: 0.8,
             }}
             resizeMode="contain"
           />
@@ -88,7 +88,9 @@ const HomeScreen = () => {
             end={{ x: 0, y: 1 }}
             style={{
               paddingBottom: 20, // Add padding if needed
-              height: 470,
+              height: 440,
+              borderBottomLeftRadius: 20,
+              borderBottomRightRadius: 20,
             }}
           >
             <LocationHeader />
@@ -106,38 +108,6 @@ const HomeScreen = () => {
             </CustomText>
           </LinearGradient>
 
-          {/* Toggle with sliding indicator */}
-          {/* <View style={styles.toggleContainer}>
-        <View style={{ flexDirection: "row", position: "relative" }}>
-          <Animated.View
-            style={[
-              styles.indicator,
-              {
-                transform: [{ translateX: indicatorX }],
-              },
-            ]}
-          />
-          {renderButton("I need to rent", 0)}
-          {renderButton("I want to list", 1)}
-        </View>
-      </View> */}
-          {/* <Animated.View
-        style={[
-          styles.slider,
-          {
-            width: width * 1,
-            transform: [{ translateX }],
-          },
-        ]}
-      >
-        <View style={[styles.tabContent, { width }]}>
-          <AvailableforRent />
-        </View>
-
-        <View style={[styles.tabContent, { width }]}>
-          <NeedToList />
-        </View>
-      </Animated.View> */}
           <View
             style={{
               paddingHorizontal: 10,

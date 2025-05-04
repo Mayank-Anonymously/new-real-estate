@@ -13,12 +13,13 @@ import SignupScreen from "../../components/Screens/Authentication/SignupScreen";
 import PropertyDetailScreen from "../../components/Screens/PropertyDetail";
 import ContactQueryForm from "../../components/ContactQueryForm";
 import VerifyOTPScreen from "../../components/Screens/Authentication/VerifyOTP";
+import SeacrResults from "../../components/Screens/SearchResults";
 
 const RootStack = createStackNavigator();
 
 const RootStackNavigator = () => {
   return (
-    <RootStack.Navigator >
+    <RootStack.Navigator initialRouteName="Root">
       <RootStack.Screen
         name="Splash"
         options={{ headerShown: false, headerTitle: "" }}
@@ -133,6 +134,12 @@ const RootStackNavigator = () => {
         name="Contact_now"
         options={{ headerShown: true, headerTitle: "" }}
         component={ContactQueryForm}
+      ></RootStack.Screen>
+
+      <RootStack.Screen
+        name="Search_Results"
+        options={{ headerShown: true, headerTitle: "" }}
+        component={SeacrResults}
       ></RootStack.Screen>
     </RootStack.Navigator>
   );

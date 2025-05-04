@@ -1,16 +1,17 @@
 import axios from "axios";
 import { HOST } from "../static";
 
-export const fetchpropdetails = async (setData, id) => {
+export const fetchallcity = async (setData) => {
   try {
-    const response = await axios.get(`${HOST}property/get-detail-by-id/${id}`, {
+    const response = await axios.get(`${HOST}property/get-properties-by-city`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
     });
-    console.log(response.data);
+
     setData(response.data);
+    console.log(response.data);
   } catch (error) {
     console.error("Error fetching county listings:", error);
   }

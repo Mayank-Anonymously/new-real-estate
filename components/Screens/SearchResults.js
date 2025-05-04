@@ -4,6 +4,7 @@ import {
   View,
   Animated,
   TextInput,
+  FlatList,
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
@@ -12,12 +13,16 @@ import { AntDesign, Entypo } from "react-native-vector-icons";
 import { Searchbar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import CustomText from "../common/Text";
-import { useNavigation } from "@react-navigation/native";
+import { fetchSearchProperties } from "../../utils/apicalls/searchquery";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const SearchBar = () => {
+const SeacrResults = () => {
   const slideAnim = useRef(new Animated.Value(-100)).current; // starts off-screen
-  const [searchQuery, setSearchQuery] = useState("");
+  const route = useRoute();
+  const { query } = route.params;
+  const [data, setData] = useState([]);
   const navigation = useNavigation();
+
   useEffect(() => {
     Animated.timing(slideAnim, {
       toValue: 0,
@@ -26,59 +31,49 @@ const SearchBar = () => {
     }).start();
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.searchBar}>
+  useEffect(() => {
+    fetchSearchProperties(query, setData);
+  }, []);
+
+  const Item = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("PropertyDetail", {
+            id: item._id,
+          })
+        }
+      >
         <View
           style={{
+            padding: 10,
+            borderBottomWidth: 1,
+            borderBottomColor: "gray",
             flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
           }}
         >
-          <AntDesign
-            name="search1"
-            size={20}
-            style={{
-              marginRight: "10",
-              marginLeft: "10",
-            }}
-          />
-          <TextInput
-            placeholder="Search New Property"
-            onChangeText={(text) => setSearchQuery(text)}
-            style={{ width: 250 }}
-          />
+          <Entypo name="location" />
+          <Text style={{ marginLeft: 10 }}>{item.title}</Text>
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Search_Results", {
-              query: searchQuery,
-            });
-          }}
-        >
-          <AntDesign
-            name="enter"
-            size={20}
-            style={{
-              marginRight: "10",
-              marginLeft: "10",
-            }}
-          />
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.searchBar}></View>
+      <FlatList data={data} renderItem={({ item }) => <Item item={item} />} />
     </View>
   );
 };
 
-export default SearchBar;
+export default SeacrResults;
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
-    marginVertical: 10,
+    backgroundColor: "white",
     elevation: 5,
-    marginTop: 50,
+    flex: 1,
   },
   searchBar: {
     flexDirection: "row",
@@ -105,5 +100,3 @@ const styles = StyleSheet.create({
     borderRadius: 12, // optional for smoothness
   },
 });
-
-/* Vector */

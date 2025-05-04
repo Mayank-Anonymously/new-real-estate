@@ -18,13 +18,12 @@ const Tab = createBottomTabNavigator();
 const { width } = Dimensions.get("window");
 
 const TabNavigator = () => {
-
-  const tabWidth = width / 3;
+  const tabWidth = width / 4;
   const INDICATOR_WIDTH = 20; // <- fixed width of indicator
   const translateX = useRef(new Animated.Value(0)).current;
 
   const moveIndicator = (index) => {
-    const idx = index ?  index : 0
+    const idx = index ? index : 0;
     const offset = idx * tabWidth + tabWidth / 2 - INDICATOR_WIDTH / 2;
     Animated.spring(translateX, {
       toValue: offset,
@@ -32,11 +31,10 @@ const TabNavigator = () => {
     }).start();
   };
 
-  
   // ✅ Hook to monitor current tab index and update indicator
   const routeNameRef = useRef();
   const navigationState = useNavigationState((state) => state);
-    console.log(navigationState)
+  console.log(navigationState);
   useEffect(() => {
     const index = navigationState?.index ?? 0;
     moveIndicator(index);
@@ -108,11 +106,19 @@ const TabNavigator = () => {
             tabPress: () => moveIndicator(1),
           }}
         />
+
+        <Tab.Screen
+          name="Subscriptions"
+          component={ProfileScreen}
+          listeners={{
+            tabPress: () => moveIndicator(2),
+          }}
+        />
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
           listeners={{
-            tabPress: () => moveIndicator(2),
+            tabPress: () => moveIndicator(3),
           }}
         />
       </Tab.Navigator>

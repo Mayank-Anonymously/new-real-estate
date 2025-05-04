@@ -66,7 +66,7 @@ export default LocationHeader;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    marginTop: 20,
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",

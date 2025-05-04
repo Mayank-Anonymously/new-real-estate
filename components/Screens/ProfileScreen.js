@@ -30,7 +30,6 @@ const ProfileScreen = () => {
 
           {[
             { label: "Personal details", icon: "user" },
-            { label: "Settings", icon: "setting" },
             { label: "Payment details", icon: "creditcard" },
             { label: "FAQs", icon: "questioncircleo" },
           ].map((item, index) => (
@@ -53,14 +52,8 @@ const ProfileScreen = () => {
           <View style={styles.iconBox}>
             <AntDesign name="swap" size={20} color={"black"} />
           </View>
-          <Text style={styles.optionLabel}>Switch to Landlord</Text>
+          <Text style={styles.optionLabel}>Logout</Text>
         </View>
-        <Switch
-          value={isLandlord}
-          onValueChange={toggleSwitch}
-          thumbColor={isLandlord ? "#4CAF50" : "#f4f3f4"}
-          trackColor={{ false: "#ccc", true: "#a5d6a7" }}
-        />
       </View>
     </SafeAreaView>
   );

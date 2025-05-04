@@ -101,14 +101,16 @@ export default function SignupScreen() {
           onChangeText={setUserType}
         />
 
-        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.submitText}>
-            {loading ? (
-              <ActivityIndicator size="smail" color="white" />
-            ) : (
-              "Submit"
-            )}
-          </Text>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff" />
+          ) : (
+            <Text style={styles.submitText}>Submit</Text>
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -182,6 +184,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 8,
     marginBottom: 24,
+    justifyContent: "center",
   },
   submitText: {
     color: "#fff",
