@@ -4,13 +4,14 @@ import ProfileScreen from "../components/Screens/ProfileScreen";
 import TabNavigator from "./TabNavigator";
 import Dashboard from "../components/Screens/Owner/Dashboard";
 import TenantFinderScreen from "../components/Screens/Owner/TenantFinder";
+import MyTabs from "./TabBar/BottomTabBar";
 
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => (
   <Drawer.Navigator>
     <Drawer.Screen
-      name="Home"
-      component={TabNavigator}
+      name="Tabs"
+      component={MyTabs}
       options={{ headerShown: false }}
     />
     <Drawer.Screen name="Profile" component={ProfileScreen} />
